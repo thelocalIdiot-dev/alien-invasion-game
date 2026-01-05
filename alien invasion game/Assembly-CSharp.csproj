@@ -67,18 +67,27 @@
     <Compile Include="Assets\scripts\player\movement\dashing.cs" />
     <Compile Include="Assets\scripts\camera\CameraEffects.cs" />
     <Compile Include="Assets\scripts\weapons\gun\gun.cs" />
+    <Compile Include="Assets\scripts\UI\screenFlash.cs" />
     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeOnTrigger.cs" />
+    <Compile Include="Assets\scripts\enemies\EnemyBullet.cs" />
     <Compile Include="Assets\scripts\helper scipts\test.cs" />
     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShaker.cs" />
+    <Compile Include="Assets\scripts\enemies\enemyNav.cs" />
+    <Compile Include="Assets\scripts\enemies\EnemyProjectile.cs" />
     <Compile Include="Assets\scripts\sound\PlaySoundExit.cs" />
     <Compile Include="Assets\scripts\sound\SoundManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakePresets.cs" />
+    <Compile Include="Assets\scripts\enemies\EnemyAttack.cs" />
+    <Compile Include="Assets\scripts\Interfaces\Damageable.cs" />
     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
     <Compile Include="Assets\EZ Camera Shake\Demo\ShakeDemo.cs" />
+    <Compile Include="Assets\scripts\enemies\EnemySpawner.cs" />
+    <Compile Include="Assets\scripts\enemies\EnemyHealth.cs" />
     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeByDistance.cs" />
     <Compile Include="Assets\scripts\camera\CameraLook.cs" />
     <Compile Include="Assets\scripts\sound\SoundMIXmanager.cs" />
+    <Compile Include="Assets\scripts\player\functionality\PlayerHealth.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
