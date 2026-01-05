@@ -7,7 +7,6 @@ public class EnemyBullet : MonoBehaviour
 {
     public GameObject impact;
     [HideInInspector] public float damage;
-    public LayerMask layerMask;
 
     private void OnTriggerEnter(Collider other)
     {
