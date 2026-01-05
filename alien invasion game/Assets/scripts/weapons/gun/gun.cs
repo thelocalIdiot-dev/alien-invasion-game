@@ -30,7 +30,7 @@ public class gun : MonoBehaviour
 
     public float ShakePower;
 
-    public float num_bullets = 0;
+    public float num_bullets = 1;
 
     public float spread;
 
@@ -118,15 +118,15 @@ public class gun : MonoBehaviour
         float Spready = Random.Range(-spread, spread);
 
         Vector3 BulletSpread = new Vector3(Spreadx, Spready, 0);
-
-       
-
+      
         RaycastHit hit;
 
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward + BulletSpread, out hit, range))
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward + BulletSpread, out hit))
         {
-            GameObject Impact = Instantiate(MuzzelFlash, hit.point, Quaternion.LookRotation(hit.normal));
+            GameObject Impact = Instantiate(ImpactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(Impact, 0.7f);
+
+            
 
           //  EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
           //
