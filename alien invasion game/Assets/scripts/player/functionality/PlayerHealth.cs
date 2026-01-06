@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour , Damageable
     [SerializeField] private Color screenFlashColor;
 
     public SkinnedMeshRenderer meshRenderer;
-    private Material originalMaterial;
+    public Material originalMaterial;
     private Coroutine flashRoutine;
     public UnityEngine.UI.Slider healthSlider;
 

@@ -36,8 +36,6 @@ public class EnemyAttack : MonoBehaviour
 
     void attack()
     {
-
-        Debug.Log("<ffssefsds");
         SoundManager.PlaySound(attackSound);
 
         Collider[] hits = Physics.OverlapSphere(transform.position, attackDistance);

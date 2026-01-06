@@ -6,6 +6,7 @@ public class EnemyProjectile : MonoBehaviour
 {
     [Header("enemy")]
     public float lookSpeed;
+    public Vector3 offset;
 
     [Header("references")]
     public Animator animator;
@@ -52,7 +53,7 @@ public class EnemyProjectile : MonoBehaviour
 
     void lookTowards()
     {
-        Vector3 playerPosition = playerMovement.instance.transform.position;
+        Vector3 playerPosition = playerMovement.instance.transform.position + offset;
         Vector3 lookDirection = playerPosition - transform.position;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), lookSpeed);
     }

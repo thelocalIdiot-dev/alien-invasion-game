@@ -128,16 +128,16 @@ public class gun : MonoBehaviour
 
             
 
-          //  EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
-          //
-          //  bomb Bomb = hit.transform.GetComponent<bomb>();
-          //
-          //  if (target != null)
-          //  {
-          //      target.TakeDamage(dammage);
-          //
-          //      StartCoroutine(DOhitFlash());
-          //  }
+            EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
+          
+            //bomb Bomb = hit.transform.GetComponent<bomb>();
+          
+            if (target != null)
+            {
+                target.TakeDamage(dammage);
+          
+                StartCoroutine(DOhitFlash());
+            }
           //
           //  if (Bomb != null)
           //  {
