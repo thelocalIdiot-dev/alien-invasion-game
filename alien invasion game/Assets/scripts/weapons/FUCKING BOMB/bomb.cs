@@ -24,7 +24,7 @@ public class bomb : MonoBehaviour
         foreach (var obj in surroundingObjects)
         {
             var rb = obj.GetComponent<Rigidbody>();
-            var Healths = obj.GetComponent<EnemyHealth>();
+            var Healths = obj.GetComponent<Damageable>();
             if (Healths != null) { Healths.TakeDamage(damage); }
             //float distance = Vector3.Distance(obj.transform.position, transform.position);
             //float falloff = Mathf.Clamp01(1 - (distance / _explosionRadius));
