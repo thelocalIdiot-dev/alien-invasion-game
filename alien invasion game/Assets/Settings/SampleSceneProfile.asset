@@ -21,16 +21,16 @@ MonoBehaviour:
     m_Value: 0.79
   intensity:
     m_OverrideState: 1
-    m_Value: 12.69
+    m_Value: 15.99
   scatter:
     m_OverrideState: 1
-    m_Value: 0.575
+    m_Value: 0.707
   clamp:
     m_OverrideState: 0
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.27058825, g: 0.28235295, b: 0.50980395, a: 1}
+    m_Value: {r: 0.550509, g: 0.56296456, b: 0.8037735, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.48
+    m_Value: 3.5
   contrast:
     m_OverrideState: 1
     m_Value: 17

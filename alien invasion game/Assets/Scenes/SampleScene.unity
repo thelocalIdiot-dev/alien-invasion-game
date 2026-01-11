@@ -5381,7 +5381,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5511,7 +5511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 429861763}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: gun tip .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5591,10 +5591,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8101650102899348190, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7891092957932549332, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2500558390393556752, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2158077982493580495, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ea856b5fc7895be4d931e67cefc69a44,
         type: 3}
       propertyPath: m_Name
       value: lilRobot
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985185789273264572, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5364203023911772204, guid: ea856b5fc7895be4d931e67cefc69a44,
         type: 3}
@@ -5615,6 +5645,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6311094490391326079, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068965566105695695, guid: ea856b5fc7895be4d931e67cefc69a44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6089,7 +6134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &747908159
 Transform:
   m_ObjectHideFlags: 0
@@ -6351,7 +6396,7 @@ GameObject:
   - component: {fileID: 1063580516}
   - component: {fileID: 1063580513}
   - component: {fileID: 1063580518}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -6527,8 +6572,8 @@ MonoBehaviour:
   meshRenderer: {fileID: 1182724347}
   originalMaterial: {fileID: 0}
   healthSlider: {fileID: 1523838698}
-  currentHealth: 100
-  MaxHealth: 24687
+  currentHealth: 400
+  MaxHealth: 400
 --- !u!1 &1132566482
 GameObject:
   m_ObjectHideFlags: 0
@@ -6939,7 +6984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1282659846}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: gun tip .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6987,7 +7032,7 @@ Transform:
   m_GameObject: {fileID: 1319513716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: 17.6, z: 3}
+  m_LocalPosition: {x: -9, y: 17.6, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7005,7 +7050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 670d2f8faa3db424c92bef1d448675ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 179.05, y: 41.65, z: 224.46}
+  boxSize: {x: 179.05, y: 39.6, z: 213.5}
   spawnDelay: 3
   spawnTimer: 0
   spawnDelayMultiplier: 0.9
@@ -7013,11 +7058,17 @@ MonoBehaviour:
   multiplieTimer: 0
   enemyList:
   - mob: {fileID: 1846361504489512954, guid: 0dfdc3343c3e5584a8f036b86e9f3bf5, type: 3}
+    grounded: 1
     probability: 50
   - mob: {fileID: 6352398058268763901, guid: 54e60ec3035bf644291c57688ac269b2, type: 3}
+    grounded: 0
     probability: 20
   - mob: {fileID: 3673895556809866430, guid: de881a31653621348b91211339b2ea93, type: 3}
-    probability: 30
+    grounded: 1
+    probability: 25
+  - mob: {fileID: 780539128165948956, guid: dee979bd398e6844f82eb9164b40764a, type: 3}
+    grounded: 1
+    probability: 5
   navMeshSampleRadius: 10
   maxSpawnAttempts: 10
 --- !u!1 &1322478916
@@ -7250,7 +7301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1515546700}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8291,7 +8342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2059653447}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}

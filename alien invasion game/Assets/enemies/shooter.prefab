@@ -9895,6 +9895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookSpeed: 2.5
   offset: {x: 0, y: 0.5, z: 0}
+  Bone: {fileID: 7684785753503444239}
   animator: {fileID: 8781254269391473535}
   projectile: {fileID: 2861612072394691832, guid: 1032a308b63c9e04c827dff5817e1d24,
     type: 3}

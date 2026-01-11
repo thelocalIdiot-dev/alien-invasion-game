@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3420059107972981090}
   - component: {fileID: 5077208223809011121}
   - component: {fileID: 3086115481031162660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BOMB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,9 +125,6 @@ MonoBehaviour:
   _explosionForce: 700
   _particles: {fileID: 7617506034299165997, guid: 97fd7e3ce7a6cf442aaf882fdfae324a,
     type: 3}
-  IgnoreLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!54 &3086115481031162660
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -166,7 +163,7 @@ GameObject:
   - component: {fileID: 3365736465128539205}
   - component: {fileID: 957640079286427468}
   - component: {fileID: 702762756868139152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    GameObject GetRandomValue()
+    int GetRandomValue()
     {
         float totalWeight = 0f;
 
@@ -54,10 +54,10 @@ public class EnemySpawner : MonoBehaviour
         {
             currentWeight += enemyList[i].probability;
             if (randomPoint <= currentWeight)
-                return enemyList[i].mob;
+                return i;
         }
 
-        return enemyList[enemyList.Length - 1].mob;
+        return enemyList.Length - 1;
     }
 
     Vector3 GetRandomPoint()
@@ -73,25 +73,33 @@ public class EnemySpawner : MonoBehaviour
 
     public void Spawn()
     {
-        GameObject prefab = GetRandomValue();
+        int prefabId = GetRandomValue();
 
         // Check if this enemy uses NavMesh
-        bool usesNavMesh = prefab.GetComponent<NavMeshAgent>() != null;
+        bool IsGrounded = enemyList[prefabId].grounded;
 
         Vector3 spawnPos = GetRandomPoint();
 
-        SoundManager.PlaySound(SoundType.EnemySpawn);      
+              
 
-        if (usesNavMesh)
+        if (IsGrounded)
         {
             if (!TryGetNavMeshPoint(out spawnPos))
             {
-                Debug.LogWarning($"Failed to find NavMesh spawn point for {prefab.name}");
+                Debug.LogWarning($"Failed to find NavMesh spawn point for {enemyList[prefabId].mob.name}");
                 return;
             }
+            else
+            {
+                SoundManager.PlaySound(SoundType.EnemySpawn);
+            }
+        }
+        else
+        {
+            SoundManager.PlaySound(SoundType.EnemySpawn);
         }
 
-        Instantiate(prefab, spawnPos, Quaternion.identity);
+        Instantiate(enemyList[prefabId].mob, spawnPos, Quaternion.identity);
     }
 
     bool TryGetNavMeshPoint(out Vector3 result)
@@ -125,6 +133,7 @@ public class EnemySpawner : MonoBehaviour
     public struct enemies
     {
         public GameObject mob;
+        public bool grounded;
         public float probability;
     }
 }
