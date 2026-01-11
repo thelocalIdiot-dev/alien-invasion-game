@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 
 namespace SmallHedge.SoundManager
 {
-    public enum SoundType { jump, land, shoot, dash, bite, EnemySpawn, explosion}
+    public enum SoundType { jump, land, shoot, dash, bite, EnemySpawn, explosion, projectileHit, enemyHurt}
 
 
     [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]

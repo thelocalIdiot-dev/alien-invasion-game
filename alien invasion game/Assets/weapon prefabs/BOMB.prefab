@@ -106,7 +106,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.86910135
+  m_Radius: 1.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5077208223809011121
 MonoBehaviour:
@@ -120,11 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46956ae461050b848aea9ba793b29fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 300
-  _explosionRadius: 5
-  _explosionForce: 700
-  _particles: {fileID: 7617506034299165997, guid: 97fd7e3ce7a6cf442aaf882fdfae324a,
-    type: 3}
+  explosion: {fileID: 11400000, guid: be05a7de4043a174eb86eb378e386c0b, type: 2}
 --- !u!54 &3086115481031162660
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,9 +145,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &2833926429689126615
 GameObject:
   m_ObjectHideFlags: 0

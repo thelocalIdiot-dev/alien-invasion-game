@@ -68,6 +68,7 @@ public class gun : MonoBehaviour
             bulletsLeft--;
 
             SoundManager.PlaySound(SoundType.shoot);
+            CameraShaker.Instance.ShakeOnce(1, 0.5f, 0, .1f);
 
             nextTimeToFire = Time.time + 1/fireRate;
 
@@ -130,7 +131,7 @@ public class gun : MonoBehaviour
 
             EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
           
-            //bomb Bomb = hit.transform.GetComponent<bomb>();
+            bomb Bomb = hit.transform.GetComponent<bomb>();
           
             if (target != null)
             {
@@ -138,11 +139,12 @@ public class gun : MonoBehaviour
           
                 StartCoroutine(DOhitFlash());
             }
-          //
-          //  if (Bomb != null)
-          //  {
-          //      Bomb.explode();
-          //  }
+          
+            if (Bomb != null)
+            {
+                CameraShaker.Instance.ShakeOnce(4, 15, 0, 3);
+                Bomb.explode();
+            }
         }
     }
 

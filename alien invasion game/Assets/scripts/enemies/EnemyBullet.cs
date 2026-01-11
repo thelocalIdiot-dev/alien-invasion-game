@@ -1,3 +1,4 @@
+using SmallHedge.SoundManager;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
@@ -26,6 +27,7 @@ public class EnemyBullet : MonoBehaviour
             PH.TakeDamage(damage);
         }
 
+        SoundManager.PlaySound(SoundType.projectileHit);
         Destroy(gameObject);
     }
 }

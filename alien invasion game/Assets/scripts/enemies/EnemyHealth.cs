@@ -1,3 +1,4 @@
+using SmallHedge.SoundManager;
 using System.Collections;
 using UnityEngine;
 
@@ -38,8 +39,9 @@ public class EnemyHealth : MonoBehaviour , Damageable
     {
         currentHealth -= amount;
         Flash();
+        SoundManager.PlaySound(SoundType.enemyHurt);
         if (currentHealth <= 0)
-        {
+        {           
             Die();
         }
     }
