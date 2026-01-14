@@ -69,6 +69,7 @@
     <Compile Include="Assets\scripts\camera\CameraEffects.cs" />
     <Compile Include="Assets\scripts\weapons\gun\gun.cs" />
     <Compile Include="Assets\scripts\UI\screenFlash.cs" />
+    <Compile Include="Assets\scripts\helper scipts\BillBoard.cs" />
     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeOnTrigger.cs" />
     <Compile Include="Assets\scripts\enemies\EnemyBullet.cs" />
     <Compile Include="Assets\scripts\helper scipts\test.cs" />
@@ -84,9 +85,11 @@
     <Compile Include="Assets\scriptable objects\explosionObj.cs" />
     <Compile Include="Assets\scripts\Interfaces\Damageable.cs" />
     <Compile Include="Assets\EZ Camera Shake\Scripts\CameraShakeInstance.cs" />
+    <Compile Include="Assets\scripts\enemies\EnemyTurn.cs" />
     <Compile Include="Assets\EZ Camera Shake\Demo\ShakeDemo.cs" />
     <Compile Include="Assets\scripts\player\abilities\Throw.cs" />
     <Compile Include="Assets\scripts\enemies\EnemySpawner.cs" />
+    <Compile Include="Assets\scripts\buffs\HealOrb.cs" />
     <Compile Include="Assets\scripts\enemies\EnemyHealth.cs" />
     <Compile Include="Assets\EZ Camera Shake\Demo\Sample Scripts\ShakeByDistance.cs" />
     <Compile Include="Assets\scripts\camera\CameraLook.cs" />

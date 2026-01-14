@@ -38,7 +38,7 @@ public class gun : MonoBehaviour
 
     public float ammo;
 
-    float bulletsLeft;
+    [HideInInspector] public float bulletsLeft;
 
     bool reloading;
 
@@ -47,6 +47,8 @@ public class gun : MonoBehaviour
     public Slider bullets;
 
     int currentGP;
+
+    public explosionObj redExploion;
     private void Start()
     {
         hitFlash.SetActive(false);
@@ -143,7 +145,7 @@ public class gun : MonoBehaviour
             if (Bomb != null)
             {
                 CameraShaker.Instance.ShakeOnce(4, 15, 0, 3);
-                Bomb.explode();
+                Bomb.explode(redExploion);
             }
         }
     }

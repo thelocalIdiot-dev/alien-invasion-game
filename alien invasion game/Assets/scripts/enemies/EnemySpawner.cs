@@ -8,7 +8,12 @@ public class EnemySpawner : MonoBehaviour
 {
     public Vector3 boxSize;
 
-    public float spawnDelay, spawnTimer;
+    public Transform enemyParent;
+
+    public float spawnDelay, spawnTimer; 
+    
+    public int swarmSize;
+
     public float spawnDelayMultiplier = 0.9f, multiplieDelay, multiplieTimer;
 
     public enemies[] enemyList;
@@ -19,24 +24,17 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (spawnTimer > spawnDelay)
+        if (enemyParent.childCount == 0)
         {
-            Spawn();
-            spawnTimer = 0;
-        }
-        else
-        {
-            spawnTimer += Time.deltaTime;
-        }
-
-        if (multiplieTimer > multiplieDelay)
-        {
-            spawnDelay *= spawnDelayMultiplier;
-            multiplieTimer = 0;
-        }
-        else
-        {
-            multiplieTimer += Time.deltaTime;
+            if (spawnTimer > spawnDelay)
+            {
+                SpawnSwarm();
+                spawnTimer = 0;
+            }
+            else
+            {
+                spawnTimer += Time.deltaTime;
+            }
         }
     }
 
@@ -71,6 +69,14 @@ public class EnemySpawner : MonoBehaviour
         );
     }
 
+    void SpawnSwarm()
+    {
+        for (int i = 0; i < swarmSize; i++)
+        {
+            Spawn();
+        }
+    }
+
     public void Spawn()
     {
         int prefabId = GetRandomValue();
@@ -80,7 +86,8 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 spawnPos = GetRandomPoint();
 
-              
+        
+
 
         if (IsGrounded)
         {
@@ -99,7 +106,8 @@ public class EnemySpawner : MonoBehaviour
             SoundManager.PlaySound(SoundType.EnemySpawn);
         }
 
-        Instantiate(enemyList[prefabId].mob, spawnPos, Quaternion.identity);
+        GameObject EP = Instantiate(enemyList[prefabId].mob, spawnPos, Quaternion.identity);
+        EP.transform.parent = enemyParent;
     }
 
     bool TryGetNavMeshPoint(out Vector3 result)

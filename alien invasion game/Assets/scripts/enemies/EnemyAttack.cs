@@ -12,6 +12,7 @@ public class EnemyAttack : MonoBehaviour
     public bool canAttack;
     public bool attacked;
     public SoundType attackSound;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -23,15 +24,20 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, EN.target.position);
-        if (distance < attackDistance && canAttack && attacked == false)
-        {            
-            animator.SetTrigger("attack");
-            Invoke(nameof(attack), attackDelay);
-            Invoke(nameof(resetAttack), attackCooldown);
-            attacked = true;
-            canAttack = false;
+        if (EN.target != null)
+        {
+            float distance = Vector3.Distance(transform.position, EN.target.position);
+
+            if (distance < attackDistance && canAttack && attacked == false)
+            {
+                animator.SetTrigger("attack");
+                Invoke(nameof(attack), attackDelay);
+                Invoke(nameof(resetAttack), attackCooldown);
+                attacked = true;
+                canAttack = false;
+            }
         }
+        
     }
 
     void attack()

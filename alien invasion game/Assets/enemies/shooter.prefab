@@ -9839,6 +9839,7 @@ GameObject:
   - component: {fileID: 4710875364944240473}
   - component: {fileID: 5674338434525610458}
   - component: {fileID: 5822509794510933533}
+  - component: {fileID: 6737030104331006267}
   m_Layer: 0
   m_Name: shooter
   m_TagString: Untagged
@@ -9895,6 +9896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookSpeed: 2.5
   offset: {x: 0, y: 0.5, z: 0}
+  numberOfBullets: 1
   Bone: {fileID: 7684785753503444239}
   animator: {fileID: 8781254269391473535}
   projectile: {fileID: 2861612072394691832, guid: 1032a308b63c9e04c827dff5817e1d24,
@@ -9904,6 +9906,7 @@ MonoBehaviour:
   shootCooldown: 2
   shootDelay: 0.45
   ProjectileDamage: 30
+  spread: {x: 0, y: 0}
 --- !u!65 &5822509794510933533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9925,6 +9928,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.2836757, y: 3.697793, z: 2.0906029}
   m_Center: {x: 0, y: 0.03334534, z: 0}
+--- !u!114 &6737030104331006267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352398058268763901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948e022aa787ba2498bc28cc138c0ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookSpeed: 2.5
+  offset: {x: 0, y: 0.5, z: 0}
+  lockUp: 0
 --- !u!1 &6993482531134674208
 GameObject:
   m_ObjectHideFlags: 0

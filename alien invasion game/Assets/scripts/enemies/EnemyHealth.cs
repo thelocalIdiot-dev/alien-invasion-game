@@ -8,13 +8,17 @@ public class EnemyHealth : MonoBehaviour , Damageable
     [SerializeField] private Material flashMaterial;
     [SerializeField] private float flashDuration = 0.1f;
 
+    [Header("drops")]
+    public GameObject healOrb;
+
     [Header("Health")]
     public float maxHealth = 300f;
     public float currentHealth;
 
     [Header("VFX")]
     public GameObject blood;
-    public Transform bloodPosition;
+    public Transform bloodPosition;    
+
 
     private Renderer[] renderers;
     private Material[][] originalMaterials;

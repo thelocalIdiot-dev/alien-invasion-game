@@ -1,3 +1,4 @@
+using EZCameraShake;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,13 @@ public class PlayerHealth : MonoBehaviour , Damageable
     [SerializeField] private Color screenFlashColor;
 
     public SkinnedMeshRenderer meshRenderer;
-    public Material originalMaterial;
+    Material originalMaterial;
     private Coroutine flashRoutine;
     public UnityEngine.UI.Slider healthSlider;
 
     public float currentHealth, MaxHealth = 100;
+
+    public bool invinsible;
     void Awake()
     {
         currentHealth = MaxHealth;
@@ -25,8 +28,10 @@ public class PlayerHealth : MonoBehaviour , Damageable
 
     public void TakeDamage(float amount)
     {
+        if(invinsible) { return; }
         currentHealth -= amount;
         Flash();
+        CameraShaker.Instance.ShakeOnce(2, 10f, 0, .2f);
         if (currentHealth <= 0)
         {
             Die();

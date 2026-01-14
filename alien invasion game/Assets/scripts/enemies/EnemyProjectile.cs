@@ -46,7 +46,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void LateUpdate()
     {
-        lookTowards();
+        //lookTowards();
     }
 
     void shoot()
@@ -76,8 +76,12 @@ public class EnemyProjectile : MonoBehaviour
 
     void lookTowards()
     {
-        Vector3 playerPosition = playerMovement.instance.transform.position + offset;
-        Vector3 lookDirection = playerPosition - transform.position;
-        Bone.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), lookSpeed);
+        if(playerMovement.instance.transform != null)
+        {
+            Vector3 playerPosition = playerMovement.instance.transform.position + offset;
+            Vector3 lookDirection = playerPosition - transform.position;
+            Bone.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), lookSpeed);
+        }
+        
     }
 }

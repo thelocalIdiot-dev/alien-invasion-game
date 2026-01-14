@@ -69,7 +69,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 3.45
+  m_BaseOffset: 3
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!65 &643761319317040007
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2982607064534786313}
-  attackDistance: 3.43
+  attackDistance: 5.45
   attackDelay: 0.12
   attackCooldown: 1
   damage: 10

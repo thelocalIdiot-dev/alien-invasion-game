@@ -1,32 +1,37 @@
+using EZCameraShake;
+using SmallHedge.SoundManager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace game.explosionManager
+
+public class explosionManager : MonoBehaviour
 {
-  // public enum ExplosionTypes { normalExplosion, superExplosion }
-  //
-  // public class explosionManager : MonoBehaviour
-  // {
-  //     public explosionlist[] explosionTypes;
-  //
-  //     public static void Explosion(Vector3 position, ExplosionTypes type)
-  //     {
-  //         Instantiate()
-  //     }
-  //
-  // }
-  //
-  // [Serializable]
-  // public struct explosionlist
-  // {
-  //     [HideInInspector] public string name;
-  //     public GameObject partical;
-  //     public float damage;
-  //     public float radius;
-  // }
+
+    public static void Explosion(Vector3 position, explosionObj explosion)
+    {
+        var surroundingObjects = Physics.OverlapSphere(position, explosion.radius);
+
+        // effects
+        SoundManager.PlaySound(SoundType.explosion);
+        CameraShaker.Instance.ShakeOnce(explosion.mag, explosion.rough, 0, explosion.fadeOut);
+
+        foreach (var obj in surroundingObjects)
+        {
+            var Healths = obj.GetComponent<Damageable>();
+            if (Healths != null) { Healths.TakeDamage(explosion.damage); }            
+        }
+
+        GameObject explosionObj = Instantiate(explosion.partical, position, Quaternion.identity);
+
+        Destroy(explosionObj, 1);
+    }
+
 }
+  
+   
+  
 
 

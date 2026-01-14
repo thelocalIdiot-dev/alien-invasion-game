@@ -29,7 +29,10 @@ public class CameraLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
-        orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+        if(orientation.transform != null)
+        {
+            orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+        }      
 
         transform.position = player.position;
     }

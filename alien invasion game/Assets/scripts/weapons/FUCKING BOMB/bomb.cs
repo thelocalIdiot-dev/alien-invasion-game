@@ -8,41 +8,18 @@ public class bomb : MonoBehaviour
 {
     public explosionObj explosion;
 
-    private float _explosionForce = 700;
+    //private float _explosionForce = 700;
 
     //public LayerMask IgnoreLayer;
     private void OnTriggerEnter(Collider other)
     {
-        explode();
+        explode(explosion);
     }
 
-    public void explode()
-    {        
+    public void explode(explosionObj EO)
+    {
 
-        var surroundingObjects = Physics.OverlapSphere(transform.position, explosion.radius);
-
-        // effects
-        SoundManager.PlaySound(SoundType.explosion);
-        CameraShaker.Instance.ShakeOnce(explosion.mag, explosion.rough, 0, explosion.fadeOut);
-
-        foreach (var obj in surroundingObjects)
-        {
-            var rb = obj.GetComponent<Rigidbody>();
-            var Healths = obj.GetComponent<Damageable>();
-            if (Healths != null) { Healths.TakeDamage(explosion.damage); }
-            //float distance = Vector3.Distance(obj.transform.position, transform.position);
-            //float falloff = Mathf.Clamp01(1 - (distance / _explosionRadius));
-            //
-            //if (rb == null) continue;
-            //rb.AddExplosionForce(_explosionForce, transform.position, _explosionRadius, 1);
-        }
-
-        
-
-        GameObject explosionObj = Instantiate(explosion.partical, transform.position, Quaternion.identity);
-
-        Destroy(explosionObj, 1);
-
+        explosionManager.Explosion(transform.position, EO);     
         Destroy(gameObject);
     }
 
