@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoReload: 30
-  healAmount: 30
+  healAmount: 100
   particals: {fileID: 8009035716486996161, guid: fc8d9dd86e6c56b4e891fa77866aaedd,
     type: 3}
 --- !u!54 &2870780532192884510

@@ -171,6 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: c1bd2617aa3bf564d87789eab7ef0598, type: 2}
   flashDuration: 0.1
+  healOrb: {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
+  propability: 70
   maxHealth: 700
   currentHealth: 0
   blood: {fileID: 550212661680399681, guid: cf70f9cb98943b0448195ee2c2cda4f8, type: 3}

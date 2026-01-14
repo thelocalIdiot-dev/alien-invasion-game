@@ -2,7 +2,7 @@ using SmallHedge.SoundManager;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour , Damageable
+public class EnemyHealth : MonoBehaviour, Damageable
 {
     [Header("Flash")]
     [SerializeField] private Material flashMaterial;
@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour , Damageable
 
     [Header("drops")]
     public GameObject healOrb;
+    [Range(0, 100)] public float propability;
 
     [Header("Health")]
     public float maxHealth = 300f;
@@ -62,7 +63,7 @@ public class EnemyHealth : MonoBehaviour , Damageable
             GameObject gib = Instantiate(blood, transform.position, Quaternion.identity);
             Destroy(gib, 0.5f);
         }
-
+        droploot(healOrb);
         Destroy(gameObject);
     }
 
@@ -97,5 +98,14 @@ public class EnemyHealth : MonoBehaviour , Damageable
         flashRoutine = null;
     }
 
+    void droploot(GameObject lootDrop)
+    {
+        float digit = Random.Range(1, 101);
+
+        if (digit <= propability)
+        {
+            Instantiate(lootDrop, transform.position, Quaternion.identity);
+        }       
+    }
 
 }
