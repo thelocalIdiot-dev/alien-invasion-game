@@ -66,7 +66,7 @@ public class EnemyProjectile : MonoBehaviour
             GameObject bullet = Instantiate(projectile, firePoint.position, spreadRotation);
 
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.velocity = spreadRotation * Vector3.forward * bulletSpeed;
+            rb.velocity = spreadRotation * Vector3.forward * bulletSpeed + offset;
 
             EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
             bulletScript.damage = ProjectileDamage;

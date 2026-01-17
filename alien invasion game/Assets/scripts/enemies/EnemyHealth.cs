@@ -63,6 +63,7 @@ public class EnemyHealth : MonoBehaviour, Damageable
             GameObject gib = Instantiate(blood, transform.position, Quaternion.identity);
             Destroy(gib, 0.5f);
         }
+        scoreManager.instance.UpdateKill();
         droploot(healOrb);
         Destroy(gameObject);
     }

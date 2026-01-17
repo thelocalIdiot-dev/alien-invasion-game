@@ -40,6 +40,11 @@ public class PlayerHealth : MonoBehaviour , Damageable
 
     private void Update()
     {
+        if(currentHealth > MaxHealth)
+        {
+            currentHealth = MaxHealth;
+        }
+
         float desiredValue = currentHealth / MaxHealth;
         healthSlider.value = Mathf.Lerp(healthSlider.value, desiredValue, 0.25f);
     }

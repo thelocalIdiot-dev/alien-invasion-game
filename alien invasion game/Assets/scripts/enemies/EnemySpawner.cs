@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     
     public int swarmSize;
 
-    public float spawnDelayMultiplier = 0.9f, multiplieDelay, multiplieTimer;
+    public float swarmSizeMultiplier = 1.2f, multiplieDelay, multiplieTimer;
 
     public enemies[] enemyList;
 
@@ -71,8 +71,12 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnSwarm()
     {
+        scoreManager.instance.UpdateWave();
+        SoundManager.PlaySound(SoundType.EnemySpawn);
+
         for (int i = 0; i < swarmSize; i++)
         {
+            
             Spawn();
         }
     }
@@ -86,9 +90,6 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 spawnPos = GetRandomPoint();
 
-        
-
-
         if (IsGrounded)
         {
             if (!TryGetNavMeshPoint(out spawnPos))
@@ -96,14 +97,14 @@ public class EnemySpawner : MonoBehaviour
                 Debug.LogWarning($"Failed to find NavMesh spawn point for {enemyList[prefabId].mob.name}");
                 return;
             }
-            else
-            {
-                SoundManager.PlaySound(SoundType.EnemySpawn);
-            }
+            //else
+            //{
+            //    SoundManager.PlaySound(SoundType.EnemySpawn);
+            //}
         }
         else
         {
-            SoundManager.PlaySound(SoundType.EnemySpawn);
+            //SoundManager.PlaySound(SoundType.EnemySpawn);
         }
 
         GameObject EP = Instantiate(enemyList[prefabId].mob, spawnPos, Quaternion.identity);

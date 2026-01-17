@@ -65,6 +65,11 @@ public class gun : MonoBehaviour
         float desiredValue = bulletsLeft / ammo;
         bullets.value = Mathf.Lerp(bullets.value, desiredValue, 0.25f);
 
+        if (bulletsLeft > ammo)
+        {
+            bulletsLeft = ammo;
+        }
+
         if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire && bulletsLeft > 0 && ! reloading)
         {
             bulletsLeft--;
