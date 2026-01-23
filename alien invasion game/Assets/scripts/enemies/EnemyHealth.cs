@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour, Damageable
 
     [Header("drops")]
     public GameObject healOrb;
+    public float XP;
     [Range(0, 100)] public float propability;
 
     [Header("Health")]
@@ -56,14 +57,15 @@ public class EnemyHealth : MonoBehaviour, Damageable
         if (bloodPosition != null)
         {
             GameObject gib = Instantiate(blood, bloodPosition.position, Quaternion.identity);
-            Destroy(gib, 0.5f);
+            Destroy(gib, 1f);
         }
         else if(bloodPosition == null)
         {
             GameObject gib = Instantiate(blood, transform.position, Quaternion.identity);
-            Destroy(gib, 0.5f);
+            Destroy(gib, 1f);
         }
         scoreManager.instance.UpdateKill();
+        scoreManager.instance.UpdateXp(XP);
         droploot(healOrb);
         Destroy(gameObject);
     }

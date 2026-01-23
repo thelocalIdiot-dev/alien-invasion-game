@@ -45,8 +45,8 @@ public class PlayerHealth : MonoBehaviour , Damageable
             currentHealth = MaxHealth;
         }
 
-        float desiredValue = currentHealth / MaxHealth;
-        healthSlider.value = Mathf.Lerp(healthSlider.value, desiredValue, 0.25f);
+        healthSlider.maxValue = MaxHealth;
+        healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth, 0.25f);
     }
 
     void Die()

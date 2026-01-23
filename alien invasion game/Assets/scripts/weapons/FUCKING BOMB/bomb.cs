@@ -7,7 +7,7 @@ using UnityEngine;
 public class bomb : MonoBehaviour
 {
     public explosionObj explosion;
-
+    
     //private float _explosionForce = 700;
 
     //public LayerMask IgnoreLayer;

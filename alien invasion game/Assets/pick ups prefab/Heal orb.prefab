@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2870780532192884510}
   - component: {fileID: 829738888245621989}
   - component: {fileID: 8467018520044135314}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Heal orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 9073699153444885394}
   - component: {fileID: 1864179545532078849}
   - component: {fileID: 7459301704517114048}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}

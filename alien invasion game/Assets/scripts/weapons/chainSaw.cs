@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class chainSaw : MonoBehaviour
+public class chainSaw : MonoBehaviour, Abilities
 {
     [Header("references")]
     Transform Player;
@@ -15,35 +15,48 @@ public class chainSaw : MonoBehaviour
     public bool thrown = false;
     public GameObject _object;
     public bool canThrow;
-    public float basePower, MaxPower = 100, cooldown, cooldownTimer;
+    public float Power = 100, cooldown, cooldownTimer;
     [Header("chain saw")]
     public float SpinSpeed = 60, damage;
-    public int maxHit = 3;
-    public int currentHitCount;
+    public float lifeTime = 3;
+
 
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
-        colliders = GetComponents<Collider>();
+        colliders = GetComponents<Collider>();       
+
+        if (thrown)
+        {
+            Destroy(gameObject, lifeTime);
+        }
+        else
+        {
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                colliders[i].enabled = false;
+            }
+            models.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
     {
         spinStuff();
-        icon.value = Mathf.Clamp(cooldownTimer, 0, cooldownTimer/cooldown);
+        
         if (!thrown)
         {
+            icon.maxValue = cooldown;
+            icon.value = cooldownTimer;
+
             if (Input.GetKey(KeyCode.E) && canThrow)
             {
-                basePower += Time.deltaTime * 50;
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     colliders[i].enabled = true;
                 }
                 models.gameObject.SetActive(true);
             }
-
-            basePower = Mathf.Clamp(basePower, 10, MaxPower);
 
             if (Input.GetKeyUp(KeyCode.E) && canThrow)
             {
@@ -52,10 +65,9 @@ public class chainSaw : MonoBehaviour
                     colliders[i].enabled = false;
                 }
                 models.gameObject.SetActive(false);
-                ThrowObj(_object, basePower);
+                ThrowObj(_object, Power);
                 cooldownTimer = 0;
                 canThrow = false;
-                basePower = 0;
             }
 
             if (cooldownTimer >= cooldown)
@@ -66,7 +78,7 @@ public class chainSaw : MonoBehaviour
             {
                 cooldownTimer += Time.deltaTime;
             }
-        }        
+        }
     }
 
     void ThrowObj(GameObject obj, float ThrowPower)
@@ -88,6 +100,16 @@ public class chainSaw : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        EnemyHealth EN = collision.gameObject.GetComponent<EnemyHealth>();
+
+        if (EN != null)
+        {
+            EN.TakeDamage(damage);
+        }
+    }
+
     void spinStuff()
     {
         if (!thrown)
@@ -98,17 +120,21 @@ public class chainSaw : MonoBehaviour
         GetComponent<Rigidbody>().angularVelocity = new Vector3(0, SpinSpeed, 0);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void upgrade(UpGradeSO UPGSO)
     {
-        if (thrown)
-        {
-            currentHitCount++;
+        if (UPGSO.weaponID != 2) { return; }
 
-            if(currentHitCount > maxHit)
-            {
-                Destroy(gameObject);
-            }
+        if (UPGSO.upGradeID == 0)
+        {
+            damage *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 1)
+        {
+            cooldown *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 2)
+        {
+            Power *= UPGSO.upGradeAmount;
         }
     }
-
 }

@@ -13,6 +13,9 @@ public class HealOrb : MonoBehaviour
             other.GetComponent<PlayerHealth>().currentHealth += healAmount;
             other.GetComponent<gun>().bulletsLeft += ammoReload;
 
+            screenFlash.instance.ScreenFlash(Color.green, 0.3f);
+
+
             GameObject particalObject = Instantiate(particals, transform.position, Quaternion.identity);
             Destroy(particalObject, 0.6f);
             Destroy(gameObject);

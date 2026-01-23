@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a60181a82897c847bb69b362f588e73, type: 3}
-  m_Name: red Explosion
+  m_Name: yellow Explosion
   m_EditorClassIdentifier: 
-  damage: 300
-  radius: 16
-  partical: {fileID: 7617506034299165997, guid: 70d15687cbfe97942a74ef3c6b90f785,
+  damage: 150
+  radius: 8
+  partical: {fileID: 7617506034299165997, guid: 97fd7e3ce7a6cf442aaf882fdfae324a,
     type: 3}
-  mag: 4
-  rough: 15
-  fadeOut: 3
+  mag: 2
+  rough: 20
+  fadeOut: 0.5

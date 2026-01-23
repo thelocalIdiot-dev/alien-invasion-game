@@ -23,7 +23,7 @@ public class dashing : MonoBehaviour
     {
         if (canDash && Input.GetKeyDown(KeyCode.LeftShift) && pm.moveDir != Vector3.zero)
         {
-            dashDirection = pm.moveDir;
+            dashDirection = pm.moveDir.normalized;
 
             Dash(dashDirection);
 

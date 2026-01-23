@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4956601926809975833}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower tentacle 3 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6700219678905254360}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 3 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7149764970048330600}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 1. L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8986806934708255268}
   - component: {fileID: 7996257704732906652}
   - component: {fileID: 2785334858140054652}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: tree shooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,19 +144,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ca24e20303f034d86c8aef612932e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookSpeed: 2
-  offset: {x: 0, y: -2, z: 0}
-  numberOfBullets: 3
   Bone: {fileID: 3847909886712038111}
   animator: {fileID: 2578103531317687356}
   projectile: {fileID: 2861612072394691832, guid: a2c110780265a3148bf1cd18144d70f6,
     type: 3}
   firePoint: {fileID: 6618545633699350224}
-  bulletSpeed: 200
+  numberOfBullets: 3
+  bulletSpeed: 300
   shootCooldown: 3
   shootDelay: 1
-  ProjectileDamage: 75
-  spread: {x: 10, y: 0}
+  ProjectileDamage: 100
+  spread: {x: 25, y: 0}
 --- !u!114 &8986806934708255268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +170,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: c1bd2617aa3bf564d87789eab7ef0598, type: 2}
   flashDuration: 0.1
   healOrb: {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
+  XP: 45
   propability: 70
   maxHealth: 700
   currentHealth: 0
@@ -192,7 +191,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -222,7 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8684112859641256214}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 2 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8174718759268692547}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower tentacle 1 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2984298579560571192}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 1. R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5711330065942904155}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: upper jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5667782876892616795}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower tentacle 3 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +381,7 @@ GameObject:
   - component: {fileID: 1960647694231627351}
   - component: {fileID: 6818421716694126008}
   - component: {fileID: 4011320910468326497}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: spawn effect (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5278,7 +5277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 551114279313974437}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5322,7 +5321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4283675482228359186}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5354,7 +5353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5453122636336527166}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: blood position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5385,7 +5384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7542670515592787958}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5416,7 +5415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3046775701525472801}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 4 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5447,7 +5446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5879289150496475498}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower tentacle 2 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5478,7 +5477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6104456039866323957}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5510,7 +5509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4652194137022471281}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 2 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5541,7 +5540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5029710095692207721}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 2 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5572,7 +5571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8441686600020645831}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 1 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5604,7 +5603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5894452558519730213}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 3 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5636,7 +5635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8203361279322168272}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5673,7 +5672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5170828866900349068}
   - component: {fileID: 2578103531317687356}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShooterTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5727,7 +5726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3676060853660061654}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5758,7 +5757,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 41284868790017759}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5789,7 +5788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5959881218650260587}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5821,7 +5820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2554601369168128057}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: upper body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5853,7 +5852,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2636415904167990591}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 4 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5886,7 +5885,7 @@ GameObject:
   - component: {fileID: 6091507288624102342}
   - component: {fileID: 2028654343461569132}
   - component: {fileID: 1517333768195675177}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10782,7 +10781,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2077413486072909027}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 4 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10813,7 +10812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257242591239031112}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower tentacle 2 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10844,7 +10843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3428908166862026375}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 3 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10876,7 +10875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5507734327388847207}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 1 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10908,7 +10907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1191536042030349881}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower tentacle 1 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10940,7 +10939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3521588142472701073}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: big tentacle 3 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10973,7 +10972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3847909886712038111}
   - component: {fileID: 4985541631415879637}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11009,7 +11008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookSpeed: 2.5
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 3.5, z: 0}
   lockUp: 0
 --- !u!1 &7576168405669906241
 GameObject:
@@ -11020,7 +11019,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3382480313345617681}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower tentacle 4 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11052,7 +11051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7067243478482531293}
   - component: {fileID: 842743958024651025}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11172,7 +11171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2126451294816811038}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 4 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11203,7 +11202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6618545633699350224}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: fire point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11234,7 +11233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5728897489398469183}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: small tentacle 2 .L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11266,7 +11265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3601458783518355513}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11300,7 +11299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1644815896377073798}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: lower tentacle 4 .R
   m_TagString: Untagged
   m_Icon: {fileID: 0}

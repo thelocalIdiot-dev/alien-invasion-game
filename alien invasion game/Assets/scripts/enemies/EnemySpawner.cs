@@ -12,9 +12,9 @@ public class EnemySpawner : MonoBehaviour
 
     public float spawnDelay, spawnTimer; 
     
-    public int swarmSize;
+    public int baseSwarmSize;
 
-    public float swarmSizeMultiplier = 1.2f, multiplieDelay, multiplieTimer;
+    //public float swarmSizeMultiplier = 1.2f, multiplieDelay, multiplieTimer;
 
     public enemies[] enemyList;
 
@@ -74,9 +74,11 @@ public class EnemySpawner : MonoBehaviour
         scoreManager.instance.UpdateWave();
         SoundManager.PlaySound(SoundType.EnemySpawn);
 
-        for (int i = 0; i < swarmSize; i++)
+        int finalSwarmSize = Random.Range(1, baseSwarmSize) * scoreManager.instance.currentWave + 1;
+
+        for (int i = 0; i < finalSwarmSize; i++)
         {
-            
+           
             Spawn();
         }
     }

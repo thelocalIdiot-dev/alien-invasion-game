@@ -1,168 +1,199 @@
-using EZCameraShake;
+﻿using EZCameraShake;
 using SmallHedge.SoundManager;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class gun : MonoBehaviour
+public class gun : MonoBehaviour, Abilities
 {
-
-    public float dammage;
-
+    /* ─────────────── WEAPON STATS ─────────────── */
+    [Header("Weapon Stats")]
+    public float damage;
+    public float knockBack;
     public float range;
-
-    public Camera cam;
-
-    public float fireRate = 15f;
-
-    public Transform[] GunTips;
-
-    public GameObject MuzzelFlash;
-
-    public GameObject ImpactEffect;
-
-    private float nextTimeToFire;
-
-    public GameObject hitFlash;
-
-    public float hitFlashDuration;
-
-    public float ShakePower;
-
-    public float num_bullets = 1;
-
+    public float fireRate;
+    public float bulletsPerShot;
     public float spread;
 
-    Vector3 HitPoint;
-
+    /* ─────────────── AMMO ─────────────── */
+    [Header("Ammo")]
     public float ammo;
-
     [HideInInspector] public float bulletsLeft;
-
-    bool reloading;
-
     public float reloadTime;
+    private bool reloading;
 
-    public Slider bullets;
+    /* ─────────────── REFERENCES ─────────────── */
+    [Header("References")]
+    public Camera cam;
+    public Transform[] gunTips;
+    public Slider ammoSlider;
 
-    int currentGP;
+    /* ─────────────── VISUAL EFFECTS ─────────────── */
+    [Header("Visual Effects")]
+    public GameObject muzzleFlash;
+    public GameObject impactEffect;
+    public GameObject hitFlash;
+    public float hitFlashDuration;
 
-    public explosionObj redExploion;
-    private void Start()
+    /* ─────────────── CAMERA SHAKE ─────────────── */
+    [Header("Camera Shake")]
+    public float shootShakePower;
+    public float shootShakeDuration;
+
+    /* ─────────────── EXPLOSIONS ─────────────── */
+    [Header("Explosion")]
+    public explosionObj redExplosion;
+
+    /* ─────────────── PRIVATE STATE ─────────────── */
+    private float nextTimeToFire;
+    private int currentGunTip;
+
+    /* ─────────────── UNITY METHODS ─────────────── */
+    private void Awake()
     {
-        hitFlash.SetActive(false);
+        currentGunTip = 0;
         bulletsLeft = ammo;
+        hitFlash.SetActive(false);
     }
 
-    void Awake()
+    private void Update()
     {
-        currentGP = 0;
-    }
+        UpdateAmmoUI();
 
-    void Update()
-    {
-        float desiredValue = bulletsLeft / ammo;
-        bullets.value = Mathf.Lerp(bullets.value, desiredValue, 0.25f);
-
-        if (bulletsLeft > ammo)
+        if (CanShoot())
         {
-            bulletsLeft = ammo;
+            Shoot();
         }
 
-        if (Input.GetMouseButton(0) && Time.time >= nextTimeToFire && bulletsLeft > 0 && ! reloading)
+        if ((Input.GetKeyDown(KeyCode.R) || bulletsLeft <= 0) && !reloading)
         {
-            bulletsLeft--;
+            StartReload();
+        }
+    }
 
-            SoundManager.PlaySound(SoundType.shoot);
-            CameraShaker.Instance.ShakeOnce(1, 0.5f, 0, .1f);
+    /* ─────────────── SHOOTING ─────────────── */
+    private bool CanShoot()
+    {
+        return Input.GetMouseButton(0)
+            && Time.time >= nextTimeToFire
+            && bulletsLeft > 0
+            && !reloading;
+    }
 
-            nextTimeToFire = Time.time + 1/fireRate;
+    private void Shoot()
+    {
+        bulletsLeft--;
+        nextTimeToFire = Time.time + 1f / fireRate;
 
-            currentGP++;
-            if(currentGP > GunTips.Length - 1)
+        SoundManager.PlaySound(SoundType.shoot);
+        CameraShaker.Instance.ShakeOnce(shootShakePower, 0.5f, 0, shootShakeDuration);
+
+        PlayMuzzleFlash();
+        CycleGunTip();
+
+        for (int i = 0; i < bulletsPerShot; i++)
+        {
+            FireRay();
+        }
+    }
+
+    private void FireRay()
+    {
+        Vector3 bulletSpread = cam.transform.forward +
+            new Vector3(
+                Random.Range(-spread, spread),
+                Random.Range(-spread, spread),
+                0f
+            );
+
+        if (Physics.Raycast(cam.transform.position, bulletSpread, out RaycastHit hit, range))
+        {
+            SpawnImpact(hit);
+
+            if (hit.transform.TryGetComponent(out EnemyHealth enemy))
             {
-                currentGP = 0;
+                enemy.TakeDamage(damage);
+                StartCoroutine(HitFlashRoutine());
             }
 
-            effects(currentGP);
-
-            for (int i = 0; i < num_bullets; i++)
+            if (hit.transform.TryGetComponent(out Rigidbody EnemyRB))
             {
-                shoot();
-            }                      
-        }
-       
-            
-        if((Input.GetKeyDown(KeyCode.R) || bulletsLeft == 0) && !reloading)
-        {
-            Reload();
+                EnemyRB.AddForce(bulletSpread * knockBack, ForceMode.Impulse);
+            }
+
+            if (hit.transform.TryGetComponent(out bomb bomb))
+            {
+                CameraShaker.Instance.ShakeOnce(4, 15, 0, 3);
+                bomb.explode(redExplosion);
+            }
         }
     }
 
-    private void Reload()
+    /* ─────────────── RELOAD ─────────────── */
+    private void StartReload()
     {
         reloading = true;
-      
-        Invoke(nameof(endReload), reloadTime);
+        Invoke(nameof(EndReload), reloadTime);
     }
 
-    void endReload()
+    private void EndReload()
     {
         bulletsLeft = ammo;
         reloading = false;
     }
 
-    void effects(int currentGunTip)
+    /* ─────────────── EFFECTS ─────────────── */
+    private void PlayMuzzleFlash()
     {
-        GameObject MGO = Instantiate(MuzzelFlash, GunTips[currentGunTip].position, GunTips[currentGunTip].rotation);
-        Destroy(MGO, 0.5f);
-
+        GameObject flash = Instantiate(muzzleFlash, gunTips[currentGunTip].position, gunTips[currentGunTip].rotation);
+        Destroy(flash, 0.5f);
     }
 
-    private void shoot()
+    private void SpawnImpact(RaycastHit hit)
     {
-        float Spreadx = Random.Range(-spread, spread);
-        float Spready = Random.Range(-spread, spread);
-
-        Vector3 BulletSpread = new Vector3(Spreadx, Spready, 0);
-      
-        RaycastHit hit;
-
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward + BulletSpread, out hit))
-        {
-            GameObject Impact = Instantiate(ImpactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(Impact, 0.7f);
-
-            
-
-            EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
-          
-            bomb Bomb = hit.transform.GetComponent<bomb>();
-          
-            if (target != null)
-            {
-                target.TakeDamage(dammage);
-          
-                StartCoroutine(DOhitFlash());
-            }
-          
-            if (Bomb != null)
-            {
-                CameraShaker.Instance.ShakeOnce(4, 15, 0, 3);
-                Bomb.explode(redExploion);
-            }
-        }
+        GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(impact, 0.7f);
     }
 
-    private IEnumerator DOhitFlash()
+    private IEnumerator HitFlashRoutine()
     {
         hitFlash.SetActive(true);
-
         yield return new WaitForSeconds(hitFlashDuration);
-
         hitFlash.SetActive(false);
     }
 
+    /* ─────────────── UTILITIES ─────────────── */
+    private void CycleGunTip()
+    {
+        currentGunTip++;
+        if (currentGunTip >= gunTips.Length)
+            currentGunTip = 0;
+    }
 
+    private void UpdateAmmoUI()
+    {
+        float targetValue = bulletsLeft / ammo;
+        ammoSlider.value = Mathf.Lerp(ammoSlider.value, targetValue, 0.25f);
+    }
+
+    /* ─────────────── Upgrade ─────────────── */
+
+    public void upgrade(UpGradeSO UPGSO)
+    {
+        if (UPGSO.weaponID != 0) { return; }
+
+        if(UPGSO.upGradeID == 0)
+        {
+            damage *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 1)
+        {
+            fireRate *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 2)
+        {
+            knockBack *= UPGSO.upGradeAmount;
+        }
+    }
 }

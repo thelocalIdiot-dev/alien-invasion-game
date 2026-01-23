@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Throw : MonoBehaviour
+public class Throw : MonoBehaviour, Abilities
 {
     public GameObject _object;
     public bool canThrow;
     public float basePower, MaxPower = 100, cooldown, cooldownTimer;
+
+    float BaseDamage;
 
     public KeyCode throwKey = KeyCode.Mouse1;
 
@@ -15,13 +17,15 @@ public class Throw : MonoBehaviour
 
     private void Start()
     {
+        BaseDamage = _object.GetComponent<bomb>().explosion.damage;
         canThrow = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        icon.value = Mathf.Clamp(cooldownTimer, 0, cooldownTimer / cooldown);
+        icon.maxValue = cooldown;
+        icon.value = cooldownTimer;
 
         if (Input.GetKey(throwKey) && canThrow)
         {
@@ -45,7 +49,7 @@ public class Throw : MonoBehaviour
         else
         {
             cooldownTimer += Time.deltaTime;
-        }               
+        }
     }
 
     void ThrowObj(GameObject obj, float ThrowPower)
@@ -55,5 +59,28 @@ public class Throw : MonoBehaviour
         Rigidbody RB = GO.GetComponent<Rigidbody>();
 
         RB.AddForce(GO.transform.forward * ThrowPower, ForceMode.Impulse);
+    }
+
+    public void upgrade(UpGradeSO UPGSO)
+    {
+        if (UPGSO.weaponID != 1) { return; }
+
+        if (UPGSO.upGradeID == 0)
+        {
+            _object.GetComponent<bomb>().explosion.damage *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 1)
+        {
+            cooldown *= UPGSO.upGradeAmount;
+        }
+        //if (UPGSO.upGradeID == 2)
+        //{
+        //    knockBack *= UPGSO.upGradeAmount;
+        //}
+    }
+
+    private void OnDisable()
+    {
+        _object.GetComponent<bomb>().explosion.damage = BaseDamage;
     }
 }

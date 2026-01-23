@@ -7,12 +7,13 @@ public class EnemyTurn : MonoBehaviour
 {
     public float lookSpeed;
     public Vector3 offset;
+    Rigidbody rb;
     [Header("lock")]
     public bool lockUp;
 
-    void Start()
+    void Awake()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -23,16 +24,31 @@ public class EnemyTurn : MonoBehaviour
             Vector3 playerPosition = playerMovement.instance.transform.position + offset;
             Vector3 lookDirection = playerPosition - transform.position;
 
-          
+            Vector3 flatDir = new Vector3(lookDirection.x, 0, lookDirection.z);
 
-            if(lockUp)
+            if (rb != null)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(lookDirection.x, 0, lookDirection.z)), lookSpeed);
+                if (lockUp)
+                {
+                    rb.MoveRotation(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(flatDir), lookSpeed));
+                }
+                else
+                {
+                    rb.MoveRotation(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), lookSpeed));
+                }
             }
             else
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), lookSpeed);
+                if (lockUp)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(flatDir), lookSpeed);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), lookSpeed);
+                }
             }
+            
         }
 
     }

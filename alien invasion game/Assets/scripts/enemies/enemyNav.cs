@@ -4,33 +4,21 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Timeline;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class enemyNav : MonoBehaviour
 {
-    public Transform target;
-    int updateEveryNFrames = 5;
-
-    private NavMeshAgent agent;
-    private int frameCounter;
+    [HideInInspector]public Transform target;
+    public float speed;
 
     void Awake()
     {       
-        agent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
-    void Update()
-    {       
-        if (target != null)
-        {
-            frameCounter++;
-
-            if (frameCounter >= updateEveryNFrames)
-            {
-                agent.SetDestination(target.position);
-                frameCounter = 0;
-            }
-        }
-       
+    private void FixedUpdate()
+    {
+        Vector3 dir = target.position - transform.position;
+        Vector3 flatDir = new Vector3(dir.x, 0, dir.z);
+        Vector3 nextPos = transform.position + flatDir * speed * Time.fixedDeltaTime;
+        GetComponent<Rigidbody>().MovePosition(nextPos);
     }
 }

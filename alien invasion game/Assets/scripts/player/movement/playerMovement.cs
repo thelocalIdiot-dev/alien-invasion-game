@@ -17,6 +17,7 @@ public class playerMovement : MonoBehaviour
     public float runSpeed;
     public float groundDrag;
     public float playerheight;
+    public float speed;
     public LayerMask WhatIsGround;
     public Vector3 moveDir;
     float moveSpeed;
@@ -102,22 +103,26 @@ public class playerMovement : MonoBehaviour
     private void Update()
     {
         if(grounded())
-            Animator.SetFloat("speed", Mathf.Clamp01(rb.velocity.magnitude));
+            Animator.SetFloat("speed", Mathf.Sqrt(rb.velocity.magnitude));
         else if(!grounded())
             Animator.SetFloat("speed", 0);
 
 
         GetInput();
         stateHandler();
-            
+
+        speed = rb.velocity.magnitude;
+
         if (States == STATES.idle || States == STATES.walking)
         {
             rb.drag = groundDrag;
         }
-        else if (States != STATES.idle && States != STATES.walking)
+        else if (States == STATES.air || States == STATES.dashing)
         {
             rb.drag = 0f;
         }
+
+        
 
         //moveSpeed = Mathf.Lerp(moveSpeed, desiredMoveSpeed, 0.2f);
 

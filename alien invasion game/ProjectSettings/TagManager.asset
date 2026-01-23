@@ -12,13 +12,13 @@ TagManager:
   - Water
   - UI
   - Bullet
-  - tree enemy
+  - enemy
   - bomb
   - Player
   - chain saw
-  - 
-  - 
-  - 
+  - heal orb
+  - chain collider
+  - tree enemy
   - 
   - 
   - 
