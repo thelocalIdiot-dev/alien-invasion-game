@@ -9,6 +9,8 @@ public class Throw : MonoBehaviour, Abilities
     public bool canThrow;
     public float basePower, MaxPower = 100, cooldown, cooldownTimer;
 
+    public bool unlocked { get; set; }
+
     float BaseDamage;
 
     public KeyCode throwKey = KeyCode.Mouse1;
@@ -24,6 +26,8 @@ public class Throw : MonoBehaviour, Abilities
     // Update is called once per frame
     void Update()
     {
+        icon.gameObject.SetActive(unlocked);
+        if (!unlocked) return;
         icon.maxValue = cooldown;
         icon.value = cooldownTimer;
 
@@ -73,10 +77,10 @@ public class Throw : MonoBehaviour, Abilities
         {
             cooldown *= UPGSO.upGradeAmount;
         }
-        //if (UPGSO.upGradeID == 2)
-        //{
-        //    knockBack *= UPGSO.upGradeAmount;
-        //}
+        if (UPGSO.upGradeID == 2)
+        {
+            unlocked = true;
+        }
     }
 
     private void OnDisable()

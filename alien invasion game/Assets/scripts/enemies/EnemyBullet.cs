@@ -6,9 +6,26 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
+    public float steeringPower = 0;
     public GameObject impact;
     [HideInInspector] public float damage;
     public LayerMask IgnoreLayer;
+    Transform player;
+    Rigidbody rb;
+    public float speed;
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GetComponent<Rigidbody>();
+        speed = rb.velocity.magnitude;
+    }
+
+    private void Update()
+    {       
+        Vector3 dir = player.position - transform.position;
+        rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime *  steeringPower));
+        rb.velocity = transform.forward * speed;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

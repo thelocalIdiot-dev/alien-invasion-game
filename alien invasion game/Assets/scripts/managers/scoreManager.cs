@@ -41,9 +41,9 @@ public class scoreManager : MonoBehaviour
     public void openLevelUpMenu()
     {
         levelUpScreen.SetActive(true);
-        currentLevel++;
         UpGradeManager.instance.setUpButton();
         TimeManager.instance.Freeze(true);
+        currentLevel++;        
         currentXP = 0;
         XPrequirement *= XpRequirementMultiplier;
     }

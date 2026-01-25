@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class gun : MonoBehaviour, Abilities
 {
+    //bool so that the ability interface actually works
+    public bool unlocked { get; set; }
+
+
     /* ─────────────── WEAPON STATS ─────────────── */
     [Header("Weapon Stats")]
     public float damage;

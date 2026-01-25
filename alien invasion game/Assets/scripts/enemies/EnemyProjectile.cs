@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    [Header("enemy")]
-    public Transform Bone;
     [Header("references")]
     public Animator animator;
     public GameObject projectile;
@@ -52,8 +50,7 @@ public class EnemyProjectile : MonoBehaviour
             float horizontalAngle = Mathf.Lerp(-spread.x / 2f, spread.x / 2f, t);
             float verticalAngle = Mathf.Lerp(-spread.y / 2f, spread.y / 2f, t);
 
-            Quaternion spreadRotation =
-                firePoint.rotation * Quaternion.Euler(verticalAngle, horizontalAngle, 0f);
+            Quaternion spreadRotation = firePoint.rotation * Quaternion.Euler(verticalAngle, horizontalAngle, 0f);
 
             GameObject bullet = Instantiate(projectile, firePoint.position, spreadRotation);
 
@@ -62,6 +59,7 @@ public class EnemyProjectile : MonoBehaviour
 
             EnemyBullet bulletScript = bullet.GetComponent<EnemyBullet>();
             bulletScript.damage = ProjectileDamage;
+            bulletScript.speed = bulletSpeed;
         }
     }
 

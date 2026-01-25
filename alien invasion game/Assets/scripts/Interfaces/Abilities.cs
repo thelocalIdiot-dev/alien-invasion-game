@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface Abilities
 {
+    public bool unlocked {  get; set; }
+
     public void upgrade(UpGradeSO UPGSO)
     {
         // ────── GUN ────── //

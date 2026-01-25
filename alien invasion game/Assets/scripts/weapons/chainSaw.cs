@@ -19,7 +19,7 @@ public class chainSaw : MonoBehaviour, Abilities
     [Header("chain saw")]
     public float SpinSpeed = 60, damage;
     public float lifeTime = 3;
-
+    public bool unlocked { get; set; }
 
     private void Awake()
     {
@@ -41,11 +41,12 @@ public class chainSaw : MonoBehaviour, Abilities
     }
 
     private void Update()
-    {
+    {       
         spinStuff();
         
-        if (!thrown)
+        if (!thrown && unlocked)
         {
+            
             icon.maxValue = cooldown;
             icon.value = cooldownTimer;
 
@@ -115,6 +116,7 @@ public class chainSaw : MonoBehaviour, Abilities
         if (!thrown)
         {
             transform.position = Player.position;
+            icon.gameObject.SetActive(unlocked);
         }
 
         GetComponent<Rigidbody>().angularVelocity = new Vector3(0, SpinSpeed, 0);
@@ -135,6 +137,10 @@ public class chainSaw : MonoBehaviour, Abilities
         if (UPGSO.upGradeID == 2)
         {
             Power *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 3)
+        {
+            unlocked = true;
         }
     }
 }

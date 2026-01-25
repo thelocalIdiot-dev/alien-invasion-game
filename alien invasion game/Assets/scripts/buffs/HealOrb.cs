@@ -11,7 +11,7 @@ public class HealOrb : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerHealth>().currentHealth += healAmount;
-            other.GetComponent<gun>().bulletsLeft += ammoReload;
+            other.GetComponentInChildren<gun>().bulletsLeft += ammoReload;
 
             screenFlash.instance.ScreenFlash(Color.green, 0.3f);
 

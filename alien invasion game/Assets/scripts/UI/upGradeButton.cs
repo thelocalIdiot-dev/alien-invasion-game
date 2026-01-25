@@ -9,12 +9,11 @@ public class upGradeButton : MonoBehaviour
     public Image image;
     public TextMeshProUGUI description;
     public TextMeshProUGUI amountText;
-    UpGradeSO upGradeSO;
+    public UpGradeSO upGradeSO;
 
     public void Awake()
-    {
-        Debug.Log("<qlefiu h");
-        upGradeSO = UpGradeManager.instance.upgrades[Random.Range(0, UpGradeManager.instance.upgrades.Length)];
+    {        
+        upGradeSO = UpGradeManager.instance.getRandomSO();
         image.sprite = upGradeSO.Image;
         description.text = upGradeSO.Name;
         amountText.SetText("x" + upGradeSO.upGradeAmount.ToString());
@@ -24,6 +23,7 @@ public class upGradeButton : MonoBehaviour
     {
         UpGradeManager.instance.UpGrade(upGradeSO);
         scoreManager.instance.closeLevelUpMenu();
+        Debug.Log("BUTTON WORKS BOYYY");
         Destroy(gameObject);
     }
 }

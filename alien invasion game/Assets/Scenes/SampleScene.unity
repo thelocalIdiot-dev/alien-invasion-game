@@ -4986,7 +4986,7 @@ GameObject:
   - component: {fileID: 23997455}
   m_Layer: 10
   m_Name: chainsaw
-  m_TagString: Untagged
+  m_TagString: ability
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5227,7 +5227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitiesOBJ:
-  - {fileID: 1063580511}
+  - {fileID: 1375345484}
   - {fileID: 2023899380}
   - {fileID: 23997450}
   buttonSlots:
@@ -5242,9 +5242,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a412fc349a68cf241b8909696f4b068b, type: 2}
   - {fileID: 11400000, guid: e251c88b72214b6498ac9eb231a463bd, type: 2}
   - {fileID: 11400000, guid: a1c88c15bfa19ad4788e3b6568b19796, type: 2}
+  - {fileID: 11400000, guid: b9ca3f9911c824941a567f3fbece7119, type: 2}
   - {fileID: 11400000, guid: 9e0ad1b3ed6e2bd46a827eb9167620ee, type: 2}
   - {fileID: 11400000, guid: 3b9688b0f08cf74409d9c05eacfcb1ba, type: 2}
   - {fileID: 11400000, guid: b50c5801520edfd47901bbd948ada020, type: 2}
+  - {fileID: 11400000, guid: 3f58acc9ee96e484ab7c68bcc5403c76, type: 2}
 --- !u!4 &57065703
 Transform:
   m_ObjectHideFlags: 0
@@ -8363,11 +8365,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553828f4860872d46a1da0ec004abb2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWave: 0
+  currentWave: 29
   currentKill: 0
   currentLevel: 0
   currentXP: 0
-  XPrequirement: 100
+  XPrequirement: 10
   XpRequirementMultiplier: 1
   killText: {fileID: 400947911}
   waveText: {fileID: 1823410645}
@@ -8664,6 +8666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797015690}
+  - component: {fileID: 797015691}
   m_Layer: 5
   m_Name: level Up screen
   m_TagString: Untagged
@@ -8691,6 +8694,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &797015691
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797015689}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6167473edba9a5741b45bbe2c556fd10, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -9246,6 +9270,7 @@ MonoBehaviour:
   image: {fileID: 2060800516}
   description: {fileID: 0}
   amountText: {fileID: 1161248938}
+  upGradeSO: {fileID: 0}
 --- !u!1 &925190663
 GameObject:
   m_ObjectHideFlags: 0
@@ -9372,7 +9397,6 @@ GameObject:
   - component: {fileID: 1063580512}
   - component: {fileID: 1063580514}
   - component: {fileID: 1063580515}
-  - component: {fileID: 1063580517}
   - component: {fileID: 1063580518}
   - component: {fileID: 1063580516}
   - component: {fileID: 1063580513}
@@ -9398,6 +9422,7 @@ Transform:
   m_Children:
   - {fileID: 2059653447}
   - {fileID: 1515546700}
+  - {fileID: 1375345486}
   m_Father: {fileID: 1124662816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1063580513
@@ -9503,41 +9528,6 @@ CapsuleCollider:
   m_Height: 3.3553185
   m_Direction: 1
   m_Center: {x: 0, y: 1.1651838, z: -0.36076808}
---- !u!114 &1063580517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063580511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe345339d9f5c948a93b349fa9cf8b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 30
-  knockBack: 2.5
-  range: 90000
-  fireRate: 4
-  bulletsPerShot: 1
-  spread: 0
-  ammo: 100
-  bulletsLeft: 0
-  reloadTime: 1
-  cam: {fileID: 330585545}
-  gunTips:
-  - {fileID: 429861763}
-  - {fileID: 1282659846}
-  ammoSlider: {fileID: 757667918}
-  muzzleFlash: {fileID: 1557555999133272254, guid: 1982d2f6e2650d544a724fda2b8a859d,
-    type: 3}
-  impactEffect: {fileID: 5469927904808794485, guid: 56138b4f5208ca54aa21b81c3d9b0875,
-    type: 3}
-  hitFlash: {fileID: 1329372480}
-  hitFlashDuration: 0.2
-  shootShakePower: 1
-  shootShakeDuration: 0.1
-  redExplosion: {fileID: 11400000, guid: 4d1f582f6971f8942b9c0f61a983c82f, type: 2}
 --- !u!114 &1063580518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10806,9 +10796,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxSize: {x: 148.1, y: 45.4, z: 176.1}
   enemyParent: {fileID: 1597211223}
-  spawnDelay: 0.9
+  spawnDelay: 1
   spawnTimer: 0
-  baseSwarmSize: 2
+  baseSwarmSize: 4
   enemyList:
   - mob: {fileID: 1846361504489512954, guid: 0dfdc3343c3e5584a8f036b86e9f3bf5, type: 3}
     grounded: 1
@@ -10821,7 +10811,10 @@ MonoBehaviour:
     probability: 20
   - mob: {fileID: 780539128165948956, guid: dee979bd398e6844f82eb9164b40764a, type: 3}
     grounded: 1
-    probability: 10
+    probability: 5
+  - mob: {fileID: 7540149379380528488, guid: ce8199c66808ef4468982ee602673b03, type: 3}
+    grounded: 1
+    probability: 5
   navMeshSampleRadius: 50
   maxSpawnAttempts: 10
 --- !u!1 &1322478916
@@ -11199,6 +11192,73 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372715845}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1375345484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1375345486}
+  - component: {fileID: 1375345485}
+  m_Layer: 9
+  m_Name: gun
+  m_TagString: ability
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1375345485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375345484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe345339d9f5c948a93b349fa9cf8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 30
+  knockBack: 4
+  range: 90000
+  fireRate: 4
+  bulletsPerShot: 1
+  spread: 0
+  ammo: 100
+  bulletsLeft: 0
+  reloadTime: 1
+  cam: {fileID: 330585545}
+  gunTips:
+  - {fileID: 429861763}
+  - {fileID: 1282659846}
+  ammoSlider: {fileID: 757667918}
+  muzzleFlash: {fileID: 1557555999133272254, guid: 1982d2f6e2650d544a724fda2b8a859d,
+    type: 3}
+  impactEffect: {fileID: 5469927904808794485, guid: 56138b4f5208ca54aa21b81c3d9b0875,
+    type: 3}
+  hitFlash: {fileID: 1329372480}
+  hitFlashDuration: 0.2
+  shootShakePower: 1
+  shootShakeDuration: 0.1
+  redExplosion: {fileID: 11400000, guid: 4d1f582f6971f8942b9c0f61a983c82f, type: 2}
+--- !u!4 &1375345486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375345484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1063580512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1381861584
 GameObject:
   m_ObjectHideFlags: 0
@@ -11436,6 +11496,7 @@ MonoBehaviour:
   image: {fileID: 1268972205}
   description: {fileID: 0}
   amountText: {fileID: 1202443390}
+  upGradeSO: {fileID: 0}
 --- !u!114 &1441017118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13605,7 +13666,7 @@ GameObject:
   - component: {fileID: 2023899382}
   m_Layer: 0
   m_Name: throw
-  m_TagString: Untagged
+  m_TagString: ability
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14675,6 +14736,7 @@ MonoBehaviour:
   image: {fileID: 8402833467721842713}
   description: {fileID: 8017626706515690939}
   amountText: {fileID: 4205607143868320553}
+  upGradeSO: {fileID: 0}
 --- !u!222 &5530850568839339413
 CanvasRenderer:
   m_ObjectHideFlags: 0

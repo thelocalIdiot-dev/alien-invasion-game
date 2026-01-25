@@ -9,6 +9,8 @@ public class UpGradeSO : ScriptableObject
     public Sprite Image;
     public string Name;
     [Header("stats")]
+    public bool stackable;
+    public bool requiresUnlock;
     public int weaponID;
     public int upGradeID;
     public float upGradeAmount;
