@@ -89,6 +89,8 @@ public class chainSaw : MonoBehaviour, Abilities
         Rigidbody RB = GO.GetComponent<Rigidbody>();
 
         RB.AddForce(GO.transform.forward * ThrowPower, ForceMode.Impulse);
+
+        GO.GetComponent<chainSaw>().damage = damage * 1.2f;
     }
 
     private void OnTriggerEnter(Collider other)

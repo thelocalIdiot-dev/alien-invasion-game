@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d212239c4fa644484033f8a49cef85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoReload: 30
+  ammoReload: 13
   healAmount: 100
   particals: {fileID: 8009035716486996161, guid: fc8d9dd86e6c56b4e891fa77866aaedd,
     type: 3}

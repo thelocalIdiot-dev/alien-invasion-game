@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a5ff125721432c4f9256de08bb1c71e, type: 3}
-  m_Name: BombUnlock
+  m_Script: {fileID: 11500000, guid: 6a60181a82897c847bb69b362f588e73, type: 3}
+  m_Name: stalker Explosion
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 9138f79a80058bb42b40dddaaf32fe5a, type: 3}
-  Name: unlock bomb
-  stackable: 0
-  requiresUnlock: 0
-  weaponID: 1
-  upGradeID: 2
-  upGradeAmount: 1.3
+  damage: 150
+  radius: 8
+  partical: {fileID: 7617506034299165997, guid: 97fd7e3ce7a6cf442aaf882fdfae324a,
+    type: 3}
+  mag: 2
+  rough: 20
+  fadeOut: 0.5

@@ -16,19 +16,30 @@ public class PlayerHealth : MonoBehaviour , Damageable
     Material originalMaterial;
     private Coroutine flashRoutine;
     public UnityEngine.UI.Slider healthSlider;
+    public GameObject deathPartical;
+    public GameObject hudCanvas;
+    public GameObject DeathCanvas;
+    public GameObject enemies;
 
     public float currentHealth, MaxHealth = 100;
 
+    public bool alive;
+
     public bool invinsible;
+
+    public static PlayerHealth instance;
     void Awake()
     {
+        instance = this;
         currentHealth = MaxHealth;
         originalMaterial = meshRenderer.material;
+        DeathCanvas.SetActive(false);
+        alive = true;
     }
 
     public void TakeDamage(float amount)
     {
-        if(invinsible) { return; }
+        if(invinsible || !alive) { return; }
         currentHealth -= amount;
         Flash();
         CameraShaker.Instance.ShakeOnce(2, 10f, 0, .2f);
@@ -40,7 +51,9 @@ public class PlayerHealth : MonoBehaviour , Damageable
 
     private void Update()
     {
-        if(currentHealth > MaxHealth)
+        
+
+        if (currentHealth > MaxHealth)
         {
             currentHealth = MaxHealth;
         }
@@ -51,11 +64,23 @@ public class PlayerHealth : MonoBehaviour , Damageable
 
     void Die()
     {
-        Destroy(gameObject);
+        hudCanvas.SetActive(false);
+        GetComponent<playerMovement>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponentInChildren<Animator>().SetFloat("speed", 0);
+        alive = false;
+        Invoke(nameof(explode), 1);
     }
 
+    void explode()
+    {
+        Instantiate(deathPartical, transform.position, Quaternion.identity);
+        CameraShaker.Instance.ShakeOnce(10, 20f, 0, .9f);
+        UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+        DeathCanvas.SetActive(true);
+        meshRenderer.enabled = false;
+    }
 
-    [ContextMenu("flash")]
     public void Flash()
     {
         if (flashRoutine != null)

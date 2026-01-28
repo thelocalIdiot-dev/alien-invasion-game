@@ -21,13 +21,13 @@ public class dashing : MonoBehaviour
 
     void Update()
     {
+        GetComponent<dashing>().enabled = GetComponent<playerMovement>().enabled;
+
         if (canDash && Input.GetKeyDown(KeyCode.LeftShift) && pm.moveDir != Vector3.zero)
         {
             dashDirection = pm.moveDir.normalized;
 
-            Dash(dashDirection);
-
-            
+            Dash(dashDirection);           
         }
 
        if (pm.dashing)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6693638064923462300}
   - component: {fileID: 7041445694934348713}
   - component: {fileID: 2269239471678837535}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: player death
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,10 +9,11 @@ public class EnemyHealth : MonoBehaviour, Damageable
     [SerializeField] private float flashDuration = 0.1f;
 
     [Header("drops")]
+    public GameObject miniHealOrb;
     public GameObject healOrb;
-    public float XP;
+    public int XPorbs;
     [Range(0, 100)] public float propability;
-
+    public float offset = 5;
     [Header("Health")]
     public float maxHealth = 300f;
     public float currentHealth;
@@ -65,12 +66,18 @@ public class EnemyHealth : MonoBehaviour, Damageable
             Destroy(gib, 1f);
         }
         scoreManager.instance.UpdateKill();
-        scoreManager.instance.UpdateXp(XP);
+
+        for (int i = 0;i < XPorbs;i++)
+        {
+            Vector3 FinalOffset = new Vector3(Random.Range(-offset, offset), Random.Range(-offset, offset), Random.Range(-offset, offset));
+            Instantiate(miniHealOrb, transform.position + FinalOffset, Quaternion.identity);
+        }
+
         droploot(healOrb);
         Destroy(gameObject);
     }
 
-    void Flash()
+    public void Flash()
     {
         if (flashRoutine != null)
             StopCoroutine(flashRoutine);

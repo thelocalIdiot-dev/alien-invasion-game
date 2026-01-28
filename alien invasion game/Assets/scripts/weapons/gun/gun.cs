@@ -32,6 +32,7 @@ public class gun : MonoBehaviour, Abilities
     public Camera cam;
     public Transform[] gunTips;
     public Slider ammoSlider;
+    public GameObject reloadIcon;
 
     /* ─────────────── VISUAL EFFECTS ─────────────── */
     [Header("Visual Effects")]
@@ -63,6 +64,8 @@ public class gun : MonoBehaviour, Abilities
 
     private void Update()
     {
+        if (GetComponentInParent<PlayerHealth>().alive == false) return;
+
         UpdateAmmoUI();
 
         if (CanShoot())
@@ -88,6 +91,7 @@ public class gun : MonoBehaviour, Abilities
     private void Shoot()
     {
         bulletsLeft--;
+        if(bulletsLeft > ammo) { bulletsLeft = ammo; }
         nextTimeToFire = Time.time + 1f / fireRate;
 
         SoundManager.PlaySound(SoundType.shoot);
@@ -177,6 +181,8 @@ public class gun : MonoBehaviour, Abilities
 
     private void UpdateAmmoUI()
     {
+        reloadIcon.SetActive(reloading);
+
         float targetValue = bulletsLeft / ammo;
         ammoSlider.value = Mathf.Lerp(ammoSlider.value, targetValue, 0.25f);
     }
@@ -198,6 +204,15 @@ public class gun : MonoBehaviour, Abilities
         if (UPGSO.upGradeID == 2)
         {
             knockBack *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 3)
+        {
+            ammo *= UPGSO.upGradeAmount;
+            bulletsLeft *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 4)
+        {
+            reloadTime *= UPGSO.upGradeAmount;
         }
     }
 }

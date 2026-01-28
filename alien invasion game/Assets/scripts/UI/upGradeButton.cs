@@ -23,7 +23,6 @@ public class upGradeButton : MonoBehaviour
     {
         UpGradeManager.instance.UpGrade(upGradeSO);
         scoreManager.instance.closeLevelUpMenu();
-        Debug.Log("BUTTON WORKS BOYYY");
         Destroy(gameObject);
     }
 }

@@ -4992,7 +4992,7 @@ Transform:
   m_GameObject: {fileID: 7540149379380528488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.1, y: -3.1, z: 16.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5035,9 +5035,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: c1bd2617aa3bf564d87789eab7ef0598, type: 2}
   flashDuration: 0.1
+  miniHealOrb: {fileID: 8163379172689793875, guid: 0adaf106fd3e08546be90cbc459fb979,
+    type: 3}
   healOrb: {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
-  XP: 75
-  propability: 100
+  XPorbs: 12
+  propability: 70
+  offset: 5
   maxHealth: 800
   currentHealth: 0
   blood: {fileID: 550212661680399681, guid: cf70f9cb98943b0448195ee2c2cda4f8, type: 3}
@@ -10145,6 +10148,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 89.98021
       objectReference: {fileID: 0}
+    - target: {fileID: -2148467118755457735, guid: 3b53a3e17385f704098e817854c1905e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0038745743
+      objectReference: {fileID: 0}
+    - target: {fileID: -2148467118755457735, guid: 3b53a3e17385f704098e817854c1905e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0038745743
+      objectReference: {fileID: 0}
+    - target: {fileID: -2148467118755457735, guid: 3b53a3e17385f704098e817854c1905e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0038745743
+      objectReference: {fileID: 0}
+    - target: {fileID: -2148467118755457735, guid: 3b53a3e17385f704098e817854c1905e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2148467118755457735, guid: 3b53a3e17385f704098e817854c1905e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0043
+      objectReference: {fileID: 0}
+    - target: {fileID: -2148467118755457735, guid: 3b53a3e17385f704098e817854c1905e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.042
+      objectReference: {fileID: 0}
     - target: {fileID: -1091455633117311755, guid: 3b53a3e17385f704098e817854c1905e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10388,7 +10421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookSpeed: 5.29
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 4, z: 0}
   lockUp: 0
 --- !u!4 &4104021551499559071 stripped
 Transform:

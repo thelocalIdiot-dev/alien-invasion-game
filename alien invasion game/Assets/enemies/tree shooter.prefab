@@ -125,7 +125,7 @@ Transform:
   m_GameObject: {fileID: 780539128165948956}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.6, y: -3.1, z: 38.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -144,7 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ca24e20303f034d86c8aef612932e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bone: {fileID: 3847909886712038111}
   animator: {fileID: 2578103531317687356}
   projectile: {fileID: 2861612072394691832, guid: a2c110780265a3148bf1cd18144d70f6,
     type: 3}
@@ -169,9 +168,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: c1bd2617aa3bf564d87789eab7ef0598, type: 2}
   flashDuration: 0.1
+  miniHealOrb: {fileID: 8163379172689793875, guid: 0adaf106fd3e08546be90cbc459fb979,
+    type: 3}
   healOrb: {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
-  XP: 45
-  propability: 70
+  XPorbs: 11
+  propability: 60
+  offset: 5
   maxHealth: 700
   currentHealth: 0
   blood: {fileID: 550212661680399681, guid: cf70f9cb98943b0448195ee2c2cda4f8, type: 3}

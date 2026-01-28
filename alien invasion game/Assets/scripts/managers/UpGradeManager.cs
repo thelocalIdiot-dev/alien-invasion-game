@@ -49,7 +49,6 @@ public class UpGradeManager : MonoBehaviour
     {
         for (int i = 0;i < buttonSlots.Length;i++)
         {
-            Debug.Log(i);
             Instantiate(buttonTemplate, buttonSlots[i]);
         }
     }

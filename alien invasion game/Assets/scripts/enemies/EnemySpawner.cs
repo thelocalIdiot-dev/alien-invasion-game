@@ -14,8 +14,6 @@ public class EnemySpawner : MonoBehaviour
     
     public int baseSwarmSize;
 
-    //public float swarmSizeMultiplier = 1.2f, multiplieDelay, multiplieTimer;
-
     public enemies[] enemyList;
 
     [Header("NavMesh")]
@@ -52,10 +50,27 @@ public class EnemySpawner : MonoBehaviour
         {
             currentWeight += enemyList[i].probability;
             if (randomPoint <= currentWeight)
-                return i;
+            {
+                if (scoreManager.instance.currentWave < enemyList[i].waveValidity)
+                {
+                    return GetRandomValue();
+                }
+                else
+                {
+                    return i;
+                }
+            }
+                          
         }
 
-        return enemyList.Length - 1;
+        if (scoreManager.instance.currentWave < enemyList[enemyList.Length - 1].waveValidity)
+        {
+            return GetRandomValue();
+        }
+        else
+        {
+            return enemyList.Length - 1;
+        }     
     }
 
     Vector3 GetRandomPoint()
@@ -77,8 +92,7 @@ public class EnemySpawner : MonoBehaviour
         int finalSwarmSize = Random.Range(1, baseSwarmSize) * scoreManager.instance.currentWave + 1;
 
         for (int i = 0; i < finalSwarmSize; i++)
-        {
-           
+        {          
             Spawn();
         }
     }
@@ -146,5 +160,6 @@ public class EnemySpawner : MonoBehaviour
         public GameObject mob;
         public bool grounded;
         public float probability;
+        public int waveValidity;
     }
 }

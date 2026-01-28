@@ -44,6 +44,7 @@ public class playerMovement : MonoBehaviour
     public Transform orientation;
     public Rigidbody rb;
     [Header("----------STATES----------")]
+    public bool locked;
     public bool sliding;
     public bool dashing;
     public bool wallrunning;
@@ -57,7 +58,8 @@ public class playerMovement : MonoBehaviour
 
     int touchingGround;
 
-    
+    public int BreakLevel = 7;
+    public float buttonMashLevel;
 
     public ParticleSystem speedLines;
     public void restartGame()
@@ -102,7 +104,9 @@ public class playerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(grounded())
+        
+
+        if (grounded())
             Animator.SetFloat("speed", Mathf.Sqrt(rb.velocity.magnitude));
         else if(!grounded())
             Animator.SetFloat("speed", 0);
@@ -110,7 +114,7 @@ public class playerMovement : MonoBehaviour
 
         GetInput();
         stateHandler();
-
+        handleBreakFree();
         speed = rb.velocity.magnitude;
 
         if (States == STATES.idle || States == STATES.walking)
@@ -122,10 +126,11 @@ public class playerMovement : MonoBehaviour
             rb.drag = 0f;
         }
 
-        
+
 
         //moveSpeed = Mathf.Lerp(moveSpeed, desiredMoveSpeed, 0.2f);
 
+        
 
         if(Input.GetKeyDown(KeyCode.P))
         {
@@ -147,6 +152,49 @@ public class playerMovement : MonoBehaviour
         //speedLines.startSpeed = rb.velocity.magnitude * 2;
         //speedLines.playbackSpeed = rb.velocity.magnitude * 2;
 
+    }
+
+    EnemyGrab enemyGrab;
+
+    public void Lock(EnemyGrab EG)
+    {
+        enemyGrab = EG;
+        rb.isKinematic = true;
+        locked = true;
+    }
+
+    void handleBreakFree()
+    {
+        if (!locked) return;
+        if(buttonMashing())
+        {
+            buttonMashLevel++;
+            buttonMashLevel++;
+            CameraShaker.Instance.ShakeOnce(buttonMashLevel, 10, 0, 0.2f);
+        }
+        else
+        {
+            buttonMashLevel--;
+        }
+        buttonMashLevel = Mathf.Clamp(buttonMashLevel, 0, Mathf.Infinity);
+
+        if(buttonMashLevel > BreakLevel)
+        {
+            breakFree();
+        }
+        
+    }
+
+    public void breakFree()
+    {
+        enemyGrab.release();
+        rb.isKinematic = false;
+        locked = false;
+    }
+
+    bool buttonMashing()
+    {
+        return Input.anyKeyDown;
     }
 
     void stateHandler()

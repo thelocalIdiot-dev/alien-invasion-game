@@ -16,6 +16,7 @@ public class scoreManager : MonoBehaviour
 
     public Slider XpSlider;
 
+    public GameObject partical;
     public GameObject levelUpScreen;
 
     private void Awake()
@@ -40,16 +41,20 @@ public class scoreManager : MonoBehaviour
 
     public void openLevelUpMenu()
     {
+        if(!PlayerHealth.instance.alive) { return; }
         levelUpScreen.SetActive(true);
         UpGradeManager.instance.setUpButton();
         TimeManager.instance.Freeze(true);
-        currentLevel++;        
+        currentLevel++;
         currentXP = 0;
         XPrequirement *= XpRequirementMultiplier;
     }
 
     public void closeLevelUpMenu()
     {
+        GameObject obj = Instantiate(partical, GameObject.FindGameObjectWithTag("Player").transform.position, Quaternion.LookRotation(new Vector3(0, 90, 0)));
+        Destroy(obj, 3);
+        
         levelUpScreen.SetActive(false);
         TimeManager.instance.UnFreeze();
     }

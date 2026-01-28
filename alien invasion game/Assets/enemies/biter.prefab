@@ -87,8 +87,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: c1bd2617aa3bf564d87789eab7ef0598, type: 2}
   flashDuration: 0.1
+  miniHealOrb: {fileID: 8163379172689793875, guid: 0adaf106fd3e08546be90cbc459fb979,
+    type: 3}
   healOrb: {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
-  XP: 20
+  XPorbs: 3
   propability: 20
   maxHealth: 150
   currentHealth: 0
