@@ -39,8 +39,14 @@ public class GameManager : MonoBehaviour
         SceneLoader.instance.loadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void MainMenu()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         SceneLoader.instance.loadScene(0);
     }
 }

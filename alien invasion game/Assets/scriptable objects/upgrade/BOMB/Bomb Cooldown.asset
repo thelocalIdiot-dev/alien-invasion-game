@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Bomb Cooldown
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 9138f79a80058bb42b40dddaaf32fe5a, type: 3}
-  Name: bomb throw cooldown
+  Name: cooldown
+  Description: reduce bomb throw cooldown
   stackable: 1
   requiresUnlock: 1
   weaponID: 1

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, Damageable
 {
+    public bool stuned;    
+
     [Header("Flash")]
     [SerializeField] private Material flashMaterial;
     [SerializeField] private float flashDuration = 0.1f;
@@ -20,8 +22,8 @@ public class EnemyHealth : MonoBehaviour, Damageable
 
     [Header("VFX")]
     public GameObject blood;
-    public Transform bloodPosition;    
-
+    public Transform bloodPosition;
+    public GameObject stunPartical;
 
     private Renderer[] renderers;
     private Material[][] originalMaterials;
@@ -29,6 +31,8 @@ public class EnemyHealth : MonoBehaviour, Damageable
 
     void Awake()
     {
+        maxHealth *= scoreManager.instance.currentWave * 0.1f;
+
         currentHealth = maxHealth;
 
         // Get ALL renderers (MeshRenderer + SkinnedMeshRenderer)
@@ -53,6 +57,21 @@ public class EnemyHealth : MonoBehaviour, Damageable
         }
     }
 
+    void Update()
+    {
+        stunPartical.SetActive(stuned);       
+    }
+
+    public void GetStunned(float duration)
+    {
+        stuned = true;
+        Invoke(nameof(noStun), duration);
+    }
+
+    void noStun()
+    {
+        stuned = false;
+    }
     void Die()
     {
         if (bloodPosition != null)
@@ -67,10 +86,15 @@ public class EnemyHealth : MonoBehaviour, Damageable
         }
         scoreManager.instance.UpdateKill();
 
-        for (int i = 0;i < XPorbs;i++)
+        for (int i = 0;i < XPorbs; i++)
         {
             Vector3 FinalOffset = new Vector3(Random.Range(-offset, offset), Random.Range(-offset, offset), Random.Range(-offset, offset));
+            if (EchoOrbsChance())
+            {
+                Instantiate(miniHealOrb, transform.position + FinalOffset, Quaternion.identity);
+            }
             Instantiate(miniHealOrb, transform.position + FinalOffset, Quaternion.identity);
+            
         }
 
         droploot(healOrb);
@@ -83,6 +107,20 @@ public class EnemyHealth : MonoBehaviour, Damageable
             StopCoroutine(flashRoutine);
 
         flashRoutine = StartCoroutine(FlashRoutine());
+    }
+
+    public bool EchoOrbsChance()
+    {
+        float digit = Random.Range(1, 101);
+
+        if (digit <= valueManager.instance.Xpmultiplier)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     IEnumerator FlashRoutine()

@@ -9,7 +9,6 @@ public class CameraEffects : MonoBehaviour
 
     [Header("fields of view")]
     public float baseFOV;
-    public float runingFOV;
     public float slidingFOV;
     public float dashingFOV;
     public float WallrunningFOV;

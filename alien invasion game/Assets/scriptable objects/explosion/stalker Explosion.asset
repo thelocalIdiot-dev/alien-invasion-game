@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a60181a82897c847bb69b362f588e73, type: 3}
   m_Name: stalker Explosion
   m_EditorClassIdentifier: 
-  damage: 150
-  radius: 8
-  partical: {fileID: 7617506034299165997, guid: 97fd7e3ce7a6cf442aaf882fdfae324a,
+  damage: 200
+  radius: 16
+  BlastForce: 5000
+  player: 1
+  enemy: 0
+  partical: {fileID: 7617506034299165997, guid: 861241e5c54fb9a468c6ae42a7d51611,
     type: 3}
-  mag: 2
+  mag: 3
   rough: 20
   fadeOut: 0.5

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class upGradeButton : MonoBehaviour
 {
     public Image image;
+    public TextMeshProUGUI Name;
     public TextMeshProUGUI description;
     public TextMeshProUGUI amountText;
     public UpGradeSO upGradeSO;
@@ -15,8 +16,24 @@ public class upGradeButton : MonoBehaviour
     {        
         upGradeSO = UpGradeManager.instance.getRandomSO();
         image.sprite = upGradeSO.Image;
-        description.text = upGradeSO.Name;
-        amountText.SetText("x" + upGradeSO.upGradeAmount.ToString());
+        Name.text = upGradeSO.Name;
+        description.text = upGradeSO.Description;
+        if(upGradeSO.upGradeAmount == 0)
+        {
+            amountText.SetText("");
+        }
+        else
+        {
+            if (upGradeSO.plus)
+            {
+                amountText.SetText("+" + upGradeSO.upGradeAmount.ToString());
+            }
+            else
+            {
+                amountText.SetText("x" + upGradeSO.upGradeAmount.ToString());
+            }
+        }
+        
     }
 
     public void upgrade()

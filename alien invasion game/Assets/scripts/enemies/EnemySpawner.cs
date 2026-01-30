@@ -89,7 +89,7 @@ public class EnemySpawner : MonoBehaviour
         scoreManager.instance.UpdateWave();
         SoundManager.PlaySound(SoundType.EnemySpawn);
 
-        int finalSwarmSize = Random.Range(1, baseSwarmSize) * scoreManager.instance.currentWave + 1;
+        int finalSwarmSize = Random.Range(1, baseSwarmSize) * scoreManager.instance.currentWave;
 
         for (int i = 0; i < finalSwarmSize; i++)
         {          

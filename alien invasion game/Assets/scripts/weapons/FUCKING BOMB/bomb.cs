@@ -18,7 +18,6 @@ public class bomb : MonoBehaviour
 
     public void explode(explosionObj EO)
     {
-
         explosionManager.Explosion(transform.position, EO);     
         Destroy(gameObject);
     }

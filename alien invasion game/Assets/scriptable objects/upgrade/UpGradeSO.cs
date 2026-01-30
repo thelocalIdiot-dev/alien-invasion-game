@@ -8,6 +8,8 @@ public class UpGradeSO : ScriptableObject
     [Header("UI")]
     public Sprite Image;
     public string Name;
+    public string Description;
+    public bool plus;
     [Header("stats")]
     public bool stackable;
     public bool requiresUnlock;

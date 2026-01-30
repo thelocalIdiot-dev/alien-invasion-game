@@ -14,6 +14,7 @@ public class UpGradeManager : MonoBehaviour
     public List<UpGradeSO> upgrades;
 
     public static UpGradeManager instance;
+
     private void Awake()
     {
         instance = this;
@@ -38,10 +39,10 @@ public class UpGradeManager : MonoBehaviour
         if (randomSO.requiresUnlock)
         {
             if (!abilitiesOBJ[randomSO.weaponID].GetComponent<Abilities>().unlocked)
-            {                
+            {
                 return getRandomSO();
             }
-        }        
+        }
         return randomSO;
     }
 

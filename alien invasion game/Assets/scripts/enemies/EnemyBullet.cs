@@ -13,16 +13,17 @@ public class EnemyBullet : MonoBehaviour
     Transform player;
     Rigidbody rb;
     public float speed;
+    public explosionObj explosion;
+    public Vector3 offset = new Vector3(0, 1, 0);
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        speed = rb.velocity.magnitude;
     }
 
     private void Update()
     {       
-        Vector3 dir = player.position - transform.position;
+        Vector3 dir = player.position + offset - transform.position;
         rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime *  steeringPower));
         rb.velocity = transform.forward * speed;
     }
@@ -37,14 +38,23 @@ public class EnemyBullet : MonoBehaviour
         GameObject impactGO = Instantiate(impact, transform.position, Quaternion.identity);
         Destroy(impactGO, 0.5f);
 
-        PlayerHealth PH = other.GetComponent<PlayerHealth>();
-
-        if (PH != null)
+        if (explosion != null)
         {
-            PH.TakeDamage(damage);
+            explosionManager.Explosion(transform.position, explosion);
+        }
+        else
+        {
+            PlayerHealth PH = other.GetComponent<PlayerHealth>();
+
+            if (PH != null)
+            {
+                PH.TakeDamage(damage);
+            }
+
+            SoundManager.PlaySound(SoundType.projectileHit);
         }
 
-        SoundManager.PlaySound(SoundType.projectileHit);
+
         Destroy(gameObject);
     }
 }

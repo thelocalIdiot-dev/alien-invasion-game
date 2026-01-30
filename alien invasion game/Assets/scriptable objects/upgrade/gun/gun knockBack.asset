@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: gun knockBack
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 6da7a07f2b7545e44aeb0bbdc5c3d245, type: 3}
-  Name: gun knockBack
+  Name: knockBack
+  Description: increase shot's knockback
+  plus: 0
   stackable: 1
+  requiresUnlock: 0
   weaponID: 0
   upGradeID: 2
-  upGradeAmount: 1.7
+  upGradeAmount: 2

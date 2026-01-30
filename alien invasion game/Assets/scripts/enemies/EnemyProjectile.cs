@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
+
+
     [Header("references")]
     public Animator animator;
     public GameObject projectile;
@@ -24,19 +26,28 @@ public class EnemyProjectile : MonoBehaviour
         shootCooldownTimer = 0;
     }
 
+    private void Awake()
+    {
+        ProjectileDamage *= scoreManager.instance.currentWave * 0.2f;
+    }
+
     void Update()
-    {        
-        if(shootCooldownTimer >= shootCooldown)
+    {    
+        if (!GetComponent<EnemyHealth>().stuned)
         {
-            animator.SetTrigger("shoot");
-            Invoke(nameof(shoot), shootDelay);
-            shootCooldownTimer = 0;
-                   
+            if (shootCooldownTimer >= shootCooldown)
+            {
+                animator.SetTrigger("shoot");
+                Invoke(nameof(shoot), shootDelay);
+                shootCooldownTimer = 0;
+
+            }
+            else
+            {
+                shootCooldownTimer += Time.deltaTime;
+            }
         }
-        else
-        {
-            shootCooldownTimer += Time.deltaTime;
-        }
+        
     }
 
     void shoot()

@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: left
+      name: keys_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,20 +118,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3247059ebb247949ba146c75bbc9d0a
-      internalID: -1938714907
+      spriteID: c28da8b50a602f44490b15eb69dce56c
+      internalID: 1433386126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: right
+      name: keys_1
       rect:
         serializedVersion: 2
         x: 16
@@ -139,20 +139,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2143d8c414c189c4f93b63aac9de772b
-      internalID: 607222380
+      spriteID: 72cc2d5fb01bd87409d596b35fd0e85b
+      internalID: -1070577323
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: E
+      name: keys_2
       rect:
         serializedVersion: 2
         x: 32
@@ -160,14 +160,98 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4225e8a085ed6914dae3e190b0d58b01
-      internalID: -2124627594
+      spriteID: 1b8c6311c66437c418891a011a67e896
+      internalID: -958378611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: keys_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dae690d94f52484c80f152c731e23f3
+      internalID: -785283371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: keys_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edc6b570ba6c3394c97dd48f91162d0e
+      internalID: 1894397832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: keys_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31ecf40b532a6be4291a8940cc5300d1
+      internalID: 2142643684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: keys_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85657699bd2fb534ebb88243d21f6ed9
+      internalID: -2002404472
       vertices: []
       indices: 
       edges: []
@@ -183,9 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      E: -2124627594
-      left: -1938714907
-      right: 607222380
+      keys_0: 1433386126
+      keys_1: -1070577323
+      keys_2: -958378611
+      keys_3: -785283371
+      keys_4: 1894397832
+      keys_5: 2142643684
+      keys_6: -2002404472
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

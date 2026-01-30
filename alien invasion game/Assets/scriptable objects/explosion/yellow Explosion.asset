@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 150
   radius: 8
+  BlastForce: 3000
+  player: 0
+  enemy: 1
   partical: {fileID: 7617506034299165997, guid: 97fd7e3ce7a6cf442aaf882fdfae324a,
     type: 3}
   mag: 2

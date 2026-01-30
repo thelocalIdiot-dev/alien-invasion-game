@@ -4984,11 +4984,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ca8255ee369fc4a9a5b342577b9ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  steeringPower: 0
   impact: {fileID: 5469927904808794485, guid: cdb9af6bf04ff0243a346442f5031910, type: 3}
   damage: 0
   IgnoreLayer:
     serializedVersion: 2
     m_Bits: 64
+  explosion: {fileID: 11400000, guid: 06447cf8540f64748be31b43f0e52bbf, type: 2}
 --- !u!1 &7518621871248175847
 GameObject:
   m_ObjectHideFlags: 0

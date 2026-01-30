@@ -7,24 +7,32 @@ public class EnemyGrab : MonoBehaviour
 {
     public float grabDistance, grabDelay, grabCooldown, explodeTime, explodeTimer;
     public Transform grabPoint;
-    public bool grabbing = false, canGrab = true;
+    public bool grabbing = false, canGrab = true, canExplode;
     public Animator animator;
     public explosionObj explosion;
     public float FlashDelay, FlashDelayTimer;
-    public bool canExplode;
+    public GameObject warning;
+
+    public float _flashDelay;
+
+    public void Awake()
+    {
+        _flashDelay = FlashDelay;
+    }
+
     private void Update()
     {
         float Distance = Vector3.Distance(playerMovement.instance.transform.position, grabPoint.position);
         if(Distance < grabDistance && !grabbing && canGrab)
         {
             Invoke(nameof(grab), grabDelay);
+            GameObject warningObj = Instantiate(warning, transform.position, Quaternion.identity);
+            Destroy(warningObj, 1);
             grabbing = true;
-            canGrab = false;
+            
         }
 
         animator.SetBool("Grabbing", grabbing);
-
-        if (grabbing) { canExplode = true; }
 
         if (canExplode)
         {
@@ -36,18 +44,19 @@ public class EnemyGrab : MonoBehaviour
             }
             else
             {
-                if(FlashDelayTimer > FlashDelay)
+                if(FlashDelayTimer > _flashDelay)
                 {
                     GetComponent<EnemyHealth>().Flash();
+                    SoundManager.PlaySound(SoundType.beep);
                     FlashDelayTimer = 0;
-                    FlashDelay /= 2;
+                    _flashDelay /= 1.36f;
                 }
                 else
                 {
                     FlashDelayTimer += Time.deltaTime;
                 }
                 
-                if(FlashDelay < 0) { FlashDelay = 0.07f; }
+                if(_flashDelay < 0) { _flashDelay = 0.09f; }
 
                 explodeTimer += Time.deltaTime;
             }
@@ -61,10 +70,21 @@ public class EnemyGrab : MonoBehaviour
 
         foreach (Collider col in player)
         {
-            explodeTimer = 0;
-
-            playerMovement.instance.Lock(GetComponent<EnemyGrab>());
-            playerMovement.instance.transform.position = grabPoint.position;
+            float Distance = Vector3.Distance(playerMovement.instance.transform.position, grabPoint.position);
+            if (Distance < grabDistance)
+            {
+                explodeTimer = 0;
+                _flashDelay = FlashDelay;
+                canExplode = true;
+                playerMovement.instance.Lock(GetComponent<EnemyGrab>());
+                playerMovement.instance.transform.position = grabPoint.position;
+            }
+            else
+            {
+                grabbing = false;
+                canGrab = true;
+                canExplode = false;
+            }           
         }
     }
 

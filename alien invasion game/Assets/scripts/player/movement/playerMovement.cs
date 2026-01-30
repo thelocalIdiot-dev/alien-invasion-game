@@ -56,11 +56,9 @@ public class playerMovement : MonoBehaviour
     public GameObject jumpSmoke;
     public Animator Animator;
 
-    int touchingGround;
-
     public int BreakLevel = 7;
     public float buttonMashLevel;
-
+    public GameObject mashIcon;
     public ParticleSystem speedLines;
     public void restartGame()
     {
@@ -104,7 +102,7 @@ public class playerMovement : MonoBehaviour
 
     private void Update()
     {
-        
+        mashIcon.SetActive(locked);
 
         if (grounded())
             Animator.SetFloat("speed", Mathf.Sqrt(rb.velocity.magnitude));

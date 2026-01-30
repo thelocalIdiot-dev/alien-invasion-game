@@ -18,24 +18,23 @@ public class EnemyAttack : MonoBehaviour
         attacked = false;
         canAttack = true;
         EN = GetComponent<enemyNav>();
+        damage *= scoreManager.instance.currentWave * 0.1f;
+
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        if (EN.target != null)
-        {
-            float distance = Vector3.Distance(transform.position, EN.target.position);
+    {       
+        float distance = Vector3.Distance(transform.position, EN.target.position);
 
-            if (distance < attackDistance && canAttack && attacked == false)
-            {
-                animator.SetTrigger("attack");
-                Invoke(nameof(attack), attackDelay);
-                Invoke(nameof(resetAttack), attackCooldown);
-                attacked = true;
-                canAttack = false;
-            }
-        }
+        if (distance < attackDistance && canAttack && !attacked && !GetComponent<EnemyHealth>().stuned)
+        {
+            animator.SetTrigger("attack");
+            Invoke(nameof(attack), attackDelay);
+            Invoke(nameof(resetAttack), attackCooldown);
+            attacked = true;
+            canAttack = false;
+            EN.enabled = false;
+        }       
         
     }
 
@@ -60,6 +59,7 @@ public class EnemyAttack : MonoBehaviour
 
     void resetAttack()
     {
+        EN.enabled = true;
         attacked = false;
         canAttack = true;
     }

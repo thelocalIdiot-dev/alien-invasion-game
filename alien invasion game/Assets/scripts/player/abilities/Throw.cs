@@ -11,21 +11,26 @@ public class Throw : MonoBehaviour, Abilities
 
     public bool unlocked { get; set; }
 
-    float BaseDamage;
+    float BaseDamage, BaseRadius;
 
     public KeyCode throwKey = KeyCode.Mouse1;
 
     public Slider icon;
+    public Slider chargeIcon;
 
     private void Start()
     {
         BaseDamage = _object.GetComponent<bomb>().explosion.damage;
+        BaseRadius = _object.GetComponent<bomb>().explosion.radius;
         canThrow = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        chargeIcon.maxValue = MaxPower;
+        chargeIcon.value = basePower;
+
         icon.gameObject.SetActive(unlocked);
         if (!unlocked) return;
         icon.maxValue = cooldown;
@@ -36,7 +41,7 @@ public class Throw : MonoBehaviour, Abilities
             basePower += Time.deltaTime * 50;
         }
 
-        basePower = Mathf.Clamp(basePower, 10, MaxPower);
+        basePower = Mathf.Clamp(basePower, 0, MaxPower);
 
         if (Input.GetKeyUp(throwKey) && canThrow)
         {
@@ -65,6 +70,12 @@ public class Throw : MonoBehaviour, Abilities
         RB.AddForce(GO.transform.forward * ThrowPower, ForceMode.Impulse);
     }
 
+    [ContextMenu("UNLOCK ME YOU SICK FU")]
+    void unlock()
+    {
+        unlocked = true;
+    }
+
     public void upgrade(UpGradeSO UPGSO)
     {
         if (UPGSO.weaponID != 1) { return; }
@@ -79,6 +90,11 @@ public class Throw : MonoBehaviour, Abilities
         }
         if (UPGSO.upGradeID == 2)
         {
+            _object.GetComponent<bomb>().explosion.radius *= UPGSO.upGradeAmount;
+            _object.GetComponent<bomb>().explosion.partical.GetComponent<ParticleSystem>().startSize *= UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 3)
+        {
             unlocked = true;
         }
     }
@@ -86,5 +102,7 @@ public class Throw : MonoBehaviour, Abilities
     private void OnDisable()
     {
         _object.GetComponent<bomb>().explosion.damage = BaseDamage;
+        _object.GetComponent<bomb>().explosion.radius = BaseRadius;
+        _object.GetComponent<bomb>().explosion.partical.GetComponent<ParticleSystem>().startSize = BaseRadius * 2;
     }
 }
