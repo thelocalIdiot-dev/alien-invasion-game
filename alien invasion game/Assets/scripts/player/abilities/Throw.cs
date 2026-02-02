@@ -36,7 +36,7 @@ public class Throw : MonoBehaviour, Abilities
         icon.maxValue = cooldown;
         icon.value = cooldownTimer;
 
-        if (Input.GetKey(throwKey) && canThrow)
+        if (Input.GetKey(throwKey) && canThrow && PlayerHealth.instance.alive)
         {
             basePower += Time.deltaTime * 50;
         }

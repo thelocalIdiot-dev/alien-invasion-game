@@ -7,7 +7,7 @@ public class EnemyAttack : MonoBehaviour
 {
     enemyNav EN;
     public Animator animator;
-    public float attackDistance, attackDelay, attackCooldown, damage;
+    public float attackDistance, attackDelay, attackCooldown, damage, lungePower;
     public bool canAttack;
     public bool attacked;
     public SoundType attackSound;
@@ -18,8 +18,7 @@ public class EnemyAttack : MonoBehaviour
         attacked = false;
         canAttack = true;
         EN = GetComponent<enemyNav>();
-        damage *= scoreManager.instance.currentWave * 0.1f;
-
+        damage += scoreManager.instance.currentWave * 3.5f;
     }
 
     void Update()
@@ -33,7 +32,8 @@ public class EnemyAttack : MonoBehaviour
             Invoke(nameof(resetAttack), attackCooldown);
             attacked = true;
             canAttack = false;
-            EN.enabled = false;
+            GetComponent<Rigidbody>().AddForce(transform.forward * lungePower, ForceMode.Impulse);
+            //EN.enabled = false;
         }       
         
     }
@@ -59,7 +59,7 @@ public class EnemyAttack : MonoBehaviour
 
     void resetAttack()
     {
-        EN.enabled = true;
+        //EN.enabled = true;
         attacked = false;
         canAttack = true;
     }

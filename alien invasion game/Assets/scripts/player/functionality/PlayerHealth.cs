@@ -3,6 +3,7 @@ using SmallHedge.SoundManager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.Rendering;
@@ -23,6 +24,14 @@ public class PlayerHealth : MonoBehaviour , Damageable
     public GameObject hudCanvas;
     public GameObject DeathCanvas;
     public GameObject enemies;
+    public GameObject HighScore;
+
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI tipText;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI highScoreText;
+
+    public string[] Tips;
 
     public Volume healthVolume;
 
@@ -69,8 +78,10 @@ public class PlayerHealth : MonoBehaviour , Damageable
 
         healthSlider.maxValue = MaxHealth;
         healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth, 0.25f);
+        float desiredText = Mathf.Round(healthSlider.value);
+        healthText.SetText(desiredText.ToString());
 
-        
+
 
         healthVolume.weight = Mathf.Abs(1-(currentHealth / MaxHealth));
     }
@@ -82,6 +93,19 @@ public class PlayerHealth : MonoBehaviour , Damageable
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponentInChildren<Animator>().SetFloat("speed", 0);
         alive = false;
+        ScoreText.SetText("score:"+scoreManager.instance.currentWave.ToString());
+        if (PlayerPrefs.GetInt("high score", 1) < scoreManager.instance.currentWave)
+        {
+            //HighScore.SetActive(true);
+            PlayerPrefs.SetInt("high score", scoreManager.instance.currentWave);
+            highScoreText.SetText("high score:"+scoreManager.instance.currentWave.ToString());
+        }
+        else
+        {
+            highScoreText.SetText("");
+            //HighScore.SetActive(false);
+        }
+        
         Invoke(nameof(explode), 1);
     }
 
@@ -91,6 +115,7 @@ public class PlayerHealth : MonoBehaviour , Damageable
         Instantiate(deathPartical, transform.position, Quaternion.identity);
         CameraShaker.Instance.ShakeOnce(10, 20f, 0, .9f);
         UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+        tipText.SetText("Tip:"+Tips[UnityEngine.Random.Range(0, Tips.Length)]);
         DeathCanvas.SetActive(true);
         meshRenderer.enabled = false;
     }

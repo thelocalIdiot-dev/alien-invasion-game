@@ -14679,8 +14679,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 2
-  groundDetectionDistance: 6
+  speed: 3000
+  groundDetectionDistance: 5.5
+  groundDrag: 7
+  detectionOrigin: {fileID: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!65 &8468667609659759477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14715,11 +14720,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stuned: 0
+  stunDuration: 0
+  stunTimer: 0
   flashMaterial: {fileID: 2100000, guid: c1bd2617aa3bf564d87789eab7ef0598, type: 2}
   flashDuration: 0.1
   miniHealOrb: {fileID: 8163379172689793875, guid: 0adaf106fd3e08546be90cbc459fb979,
     type: 3}
-  healOrb: {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
+  drops:
+  - {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
+  - {fileID: 1447436671432186352, guid: 41db903f16bc63048ad0d052a5679e18, type: 3}
   XPorbs: 3
   propability: 4
   offset: 5
@@ -14737,7 +14746,7 @@ Rigidbody:
   m_GameObject: {fileID: 6003593893761963312}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -14767,7 +14776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948e022aa787ba2498bc28cc138c0ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookSpeed: 10
+  lookSpeed: 100
   offset: {x: 0, y: 0, z: 0}
   lockUp: 1
   shooter: {fileID: 0}

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, Damageable
 {
-    public bool stuned;    
+    [Header("stun stuff")]
+    public bool stuned;   
+    public float stunDuration;   
+    public float stunTimer;   
+    
 
     [Header("Flash")]
     [SerializeField] private Material flashMaterial;
@@ -12,7 +16,7 @@ public class EnemyHealth : MonoBehaviour, Damageable
 
     [Header("drops")]
     public GameObject miniHealOrb;
-    public GameObject healOrb;
+    public GameObject[] drops;
     public int XPorbs;
     [Range(0, 100)] public float propability;
     public float offset = 5;
@@ -31,7 +35,7 @@ public class EnemyHealth : MonoBehaviour, Damageable
 
     void Awake()
     {
-        maxHealth *= scoreManager.instance.currentWave * 0.1f;
+        //maxHealth *= scoreManager.instance.currentWave * 0.1f;
 
         currentHealth = maxHealth;
 
@@ -48,7 +52,23 @@ public class EnemyHealth : MonoBehaviour, Damageable
 
     public void TakeDamage(float amount)
     {
-        currentHealth -= amount;
+        enemyNav en = GetComponent<enemyNav>();
+        if (en)
+        {
+            if (en.Grounded())
+            {
+                currentHealth -= amount;
+            }
+            else
+            {
+                currentHealth -= amount * 2;
+            }
+        }
+        else
+        {
+            currentHealth -= amount;
+        }
+        
         Flash();
         SoundManager.PlaySound(SoundType.enemyHurt);
         if (currentHealth <= 0)
@@ -59,19 +79,26 @@ public class EnemyHealth : MonoBehaviour, Damageable
 
     void Update()
     {
-        stunPartical.SetActive(stuned);       
+        stunPartical.SetActive(stuned);
+        if (stuned)
+        {
+            if(stunTimer >= stunDuration)
+            {
+                stuned = false;
+            }
+            else
+            {
+                stunTimer += Time.deltaTime;
+            }
+        }
     }
 
     public void GetStunned(float duration)
     {
         stuned = true;
-        Invoke(nameof(noStun), duration);
-    }
-
-    void noStun()
-    {
-        stuned = false;
-    }
+        stunDuration = duration;
+    }    
+    
     void Die()
     {
         if (bloodPosition != null)
@@ -97,7 +124,7 @@ public class EnemyHealth : MonoBehaviour, Damageable
             
         }
 
-        droploot(healOrb);
+        droploot(drops[Random.Range(0, drops.Length)]);
         Destroy(gameObject);
     }
 
@@ -113,7 +140,7 @@ public class EnemyHealth : MonoBehaviour, Damageable
     {
         float digit = Random.Range(1, 101);
 
-        if (digit <= valueManager.instance.Xpmultiplier)
+        if (digit <= valueManager.instance.extraOrb)
         {
             return true;
         }

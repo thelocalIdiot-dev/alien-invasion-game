@@ -15,9 +15,9 @@ public class playerMovement : MonoBehaviour
     [Header("----------MOVEMENT----------")]
     [Header("---Ground movement---")]
     public float runSpeed;
+    public float speedBuff;
     public float groundDrag;
     public float playerheight;
-    public float speed;
     public LayerMask WhatIsGround;
     public Vector3 moveDir;
     float moveSpeed;
@@ -52,14 +52,15 @@ public class playerMovement : MonoBehaviour
     public STATES States;
     [Header("----------EFFECTS----------")]
     [Header("---VFX---")]
-
     public GameObject jumpSmoke;
     public Animator Animator;
+    public TrailRenderer speedTrail;
 
     public int BreakLevel = 7;
     public float buttonMashLevel;
     public GameObject mashIcon;
     public ParticleSystem speedLines;
+    public bool hasSpeedEffect;
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -101,7 +102,7 @@ public class playerMovement : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
         mashIcon.SetActive(locked);
 
         if (grounded())
@@ -109,11 +110,10 @@ public class playerMovement : MonoBehaviour
         else if(!grounded())
             Animator.SetFloat("speed", 0);
 
+        speedTrail.enabled = hasSpeedEffect;
 
         GetInput();
         stateHandler();
-        handleBreakFree();
-        speed = rb.velocity.magnitude;
 
         if (States == STATES.idle || States == STATES.walking)
         {
@@ -124,11 +124,6 @@ public class playerMovement : MonoBehaviour
             rb.drag = 0f;
         }
 
-
-
-        //moveSpeed = Mathf.Lerp(moveSpeed, desiredMoveSpeed, 0.2f);
-
-        
 
         if(Input.GetKeyDown(KeyCode.P))
         {
@@ -152,67 +147,91 @@ public class playerMovement : MonoBehaviour
 
     }
 
-    EnemyGrab enemyGrab;
-
-    public void Lock(EnemyGrab EG)
+    public void SpeedEffect(float duration)
     {
-        enemyGrab = EG;
-        rb.isKinematic = true;
-        locked = true;
+        hasSpeedEffect = true;
+        Invoke(nameof(DisableSpeedEffect), duration);
+    } 
+
+    void DisableSpeedEffect()
+    {
+        hasSpeedEffect = false;
     }
 
-    void handleBreakFree()
-    {
-        if (!locked) return;
-        if(buttonMashing())
-        {
-            buttonMashLevel++;
-            buttonMashLevel++;
-            CameraShaker.Instance.ShakeOnce(buttonMashLevel, 10, 0, 0.2f);
-        }
-        else
-        {
-            buttonMashLevel--;
-        }
-        buttonMashLevel = Mathf.Clamp(buttonMashLevel, 0, Mathf.Infinity);
-
-        if(buttonMashLevel > BreakLevel)
-        {
-            breakFree();
-        }
-        
-    }
-
-    public void breakFree()
-    {
-        enemyGrab.release();
-        rb.isKinematic = false;
-        locked = false;
-    }
-
-    bool buttonMashing()
-    {
-        return Input.anyKeyDown;
-    }
-
+    #region stupid useless code
+    //EnemyGrab enemyGrab;
+    // public void Lock(EnemyGrab EG)
+    // {
+    //     enemyGrab = EG;
+    //     rb.isKinematic = true;
+    //     locked = true;
+    // }
+    //
+    // void handleBreakFree()
+    // {
+    //     if (!locked) return;
+    //     if(buttonMashing())
+    //     {
+    //         buttonMashLevel++;
+    //         buttonMashLevel++;
+    //         CameraShaker.Instance.ShakeOnce(buttonMashLevel, 10, 0, 0.2f);
+    //     }
+    //     else
+    //     {
+    //         buttonMashLevel--;
+    //     }
+    //     buttonMashLevel = Mathf.Clamp(buttonMashLevel, 0, Mathf.Infinity);
+    //
+    //     if(buttonMashLevel > BreakLevel)
+    //     {
+    //         breakFree();
+    //     }
+    //     
+    //}
+    //public void breakFree()
+    //{
+    //    enemyGrab.release();
+    //    rb.isKinematic = false;
+    //    locked = false;
+    //}
+    //
+    //bool buttonMashing()
+    //{
+    //    return Input.anyKeyDown;
+    //}
+    //private IEnumerator smoothlyChangeSpeed()
+    //{
+    //    float time = 0f;
+    //    float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
+    //    float startValue = moveSpeed;
+    //
+    //    while (time < difference)
+    //    {
+    //        moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+    //        time += Time.deltaTime;
+    //        yield return null;
+    //    }
+    //
+    //    moveSpeed = desiredMoveSpeed;
+    //}
+    #endregion
     void stateHandler()
     {
-      
-        if(sliding)
+        if (hasSpeedEffect && grounded())
         {
-            States = STATES.sliding;
-            desiredMoveSpeed = slideSpeed;
-            CameraEffects.instance.changeFOV(CameraEffects.instance.slidingFOV, 0.25f);
-            CameraEffects.instance.tilt(CameraEffects.instance.slidingTilt, 0.25f);
+            desiredMoveSpeed = speedBuff;
+            States = STATES.walking;
+            CameraEffects.instance.tilt(CameraEffects.instance.speedBoostTilt * -horizontalInput, 0.25f);
         }
+        else if (hasSpeedEffect && !grounded())
+        {
+            desiredMoveSpeed = speedBuff;
+            States = STATES.air;
+            CameraEffects.instance.tilt(CameraEffects.instance.speedBoostTilt * -horizontalInput, 0.25f);
+        }       
         else if (dashing)
         {
             States = STATES.dashing;
-        }
-        else if (wallrunning)
-        {
-            States = STATES.wallrunning;
-            desiredMoveSpeed = wallrunSpeed;
         }
         else if (grounded() && (horizontalInput != 0 || verticalInput != 0))
         {
@@ -232,36 +251,9 @@ public class playerMovement : MonoBehaviour
         {
             States = STATES.air;         
             CameraEffects.instance.tilt(CameraEffects.instance.strafTilt * -horizontalInput, 0.25f);
-            //CameraShaker.Instance.ShakeOnce(rb.velocity.magnitude, rough, fadeIn, 0.5f);
         }
 
-        if(moveSpeed != 0)
-        {
-            StartCoroutine(smoothlyChangeSpeed());
-        }
-        else
-        {
-            moveSpeed = desiredMoveSpeed;
-        }
-
-
-
-    }
-
-    private IEnumerator smoothlyChangeSpeed()
-    {
-        float time = 0f;
-        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
-        float startValue = moveSpeed;
-
-        while(time < difference)
-        {
-            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        moveSpeed = desiredMoveSpeed;
+        moveSpeed = desiredMoveSpeed;       
     }
 
 

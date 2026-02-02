@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a60181a82897c847bb69b362f588e73, type: 3}
   m_Name: tree Explosion
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 50
   radius: 7
   BlastForce: 1000
   player: 1

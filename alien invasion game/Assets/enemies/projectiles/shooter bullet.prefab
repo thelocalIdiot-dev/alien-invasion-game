@@ -4989,7 +4989,7 @@ MonoBehaviour:
   damage: 0
   IgnoreLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   speed: 0
   explosion: {fileID: 0}
   offset: {x: 0, y: 1, z: 0}

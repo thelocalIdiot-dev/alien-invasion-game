@@ -9,10 +9,11 @@ public class valueManager : MonoBehaviour, Abilities
 
     public static valueManager instance;
 
-    public float Xpmultiplier;
-    public float lifeSteal;
-    public float defence;
-    public bool XPdropDamage;
+    public float extraOrb = 0;
+    public float lifeSteal = 1;
+    public float SpeedMultiplier = 1;
+    public float defence = 1;
+    public bool XPdropDamage = false;
     void Start()
     {
         unlocked = true;
@@ -46,7 +47,12 @@ public class valueManager : MonoBehaviour, Abilities
         }
         if (UPGSO.upGradeID == 4) //xp multiplier
         {
-            Xpmultiplier += UPGSO.upGradeAmount;
+            extraOrb += UPGSO.upGradeAmount;
+        }
+        if (UPGSO.upGradeID == 5) //xp multiplier
+        {
+            SpeedMultiplier *= UPGSO.upGradeAmount;
+            playerMovement.instance.runSpeed *= SpeedMultiplier;
         }
 
     }

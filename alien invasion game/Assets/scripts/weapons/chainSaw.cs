@@ -1,3 +1,4 @@
+using SmallHedge.SoundManager;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,6 +12,7 @@ public class chainSaw : MonoBehaviour, Abilities
     Collider[] colliders;
     public Transform models;
     public Slider icon;
+    public AudioSource chainLoop;
     [Header("throw")]
     public bool thrown = false;
     public GameObject _object;
@@ -45,17 +47,22 @@ public class chainSaw : MonoBehaviour, Abilities
         spinStuff();
         
         if (!thrown && unlocked)
-        {
-            
+        {           
             icon.maxValue = cooldown;
             icon.value = cooldownTimer;
 
-            if (Input.GetKey(KeyCode.E) && canThrow)
+            if (Input.GetKeyDown(KeyCode.E) && canThrow && PlayerHealth.instance.alive)
+            {
+                chainLoop.Play();
+            }
+
+            if (Input.GetKey(KeyCode.E) && canThrow && PlayerHealth.instance.alive)
             {
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     colliders[i].enabled = true;
                 }
+                chainLoop.pitch += Time.deltaTime;
                 models.gameObject.SetActive(true);
             }
 
@@ -65,10 +72,12 @@ public class chainSaw : MonoBehaviour, Abilities
                 {
                     colliders[i].enabled = false;
                 }
+                chainLoop.pitch = 0;
                 models.gameObject.SetActive(false);
                 ThrowObj(_object, Power);
                 cooldownTimer = 0;
                 canThrow = false;
+                chainLoop.Stop();
             }
 
             if (cooldownTimer >= cooldown)
@@ -79,6 +88,8 @@ public class chainSaw : MonoBehaviour, Abilities
             {
                 cooldownTimer += Time.deltaTime;
             }
+            chainLoop.pitch = Mathf.Clamp(chainLoop.pitch, 0, 1.5f);
+
         }
     }
 
@@ -91,10 +102,18 @@ public class chainSaw : MonoBehaviour, Abilities
         RB.AddForce(GO.transform.forward * ThrowPower, ForceMode.Impulse);
 
         GO.GetComponent<chainSaw>().damage = damage * 1.2f;
+        GO.GetComponent<AudioSource>().Play();
+    }
+
+    [ContextMenu("UNLOCK ME YOU SICK FU")]
+    void unlock()
+    {
+        unlocked = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        SoundManager.PlaySound(SoundType.chainsawHit);
         EnemyHealth EN = other.GetComponent<EnemyHealth>();
         
         if (EN != null)
@@ -105,6 +124,8 @@ public class chainSaw : MonoBehaviour, Abilities
 
     private void OnCollisionEnter(Collision collision)
     {
+        
+
         EnemyHealth EN = collision.gameObject.GetComponent<EnemyHealth>();
 
         if (EN != null)
@@ -120,7 +141,7 @@ public class chainSaw : MonoBehaviour, Abilities
             transform.position = Player.position;
             icon.gameObject.SetActive(unlocked);
         }
-
+        
         GetComponent<Rigidbody>().angularVelocity = new Vector3(0, SpinSpeed, 0);
     }
 

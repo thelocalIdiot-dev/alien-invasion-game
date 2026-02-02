@@ -20,4 +20,4 @@ MonoBehaviour:
   requiresUnlock: 0
   weaponID: 5
   upGradeID: 2
-  upGradeAmount: 50
+  upGradeAmount: 75

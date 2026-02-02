@@ -183,6 +183,8 @@ public class gun : MonoBehaviour, Abilities
     {
         reloadIcon.SetActive(reloading);
 
+        reloadIcon.transform.Rotate(0, 0, -10);
+
         float targetValue = bulletsLeft / ammo;
         ammoSlider.value = Mathf.Lerp(ammoSlider.value, targetValue, 0.25f);
     }

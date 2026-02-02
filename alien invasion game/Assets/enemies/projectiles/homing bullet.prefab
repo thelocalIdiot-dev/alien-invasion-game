@@ -4984,7 +4984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ca8255ee369fc4a9a5b342577b9ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steeringPower: 850
+  steeringPower: 450
   impact: {fileID: 5469927904808794485, guid: e7af46aaebd85e8498511cfeffb0fd5b, type: 3}
   damage: 0
   IgnoreLayer:

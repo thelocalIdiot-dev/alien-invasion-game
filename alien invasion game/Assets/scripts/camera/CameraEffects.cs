@@ -15,6 +15,7 @@ public class CameraEffects : MonoBehaviour
 
     [Header("tilt values")]
     public float strafTilt;
+    public float speedBoostTilt;
     public float slidingTilt;
     public float WallrunningTilt;
 

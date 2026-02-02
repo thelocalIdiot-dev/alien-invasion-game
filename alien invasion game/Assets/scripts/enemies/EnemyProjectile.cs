@@ -21,6 +21,7 @@ public class EnemyProjectile : MonoBehaviour
 
     public Vector2 spread;
 
+    public bool firstShot;
     void Start()
     {
         shootCooldownTimer = 0;
@@ -28,19 +29,28 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Awake()
     {
-        ProjectileDamage *= scoreManager.instance.currentWave * 0.2f;
+        ProjectileDamage += scoreManager.instance.currentWave * 4f;
+        bulletSpeed += scoreManager.instance.currentWave * 4.5f;
+        firstShot = true;
     }
 
     void Update()
     {    
         if (!GetComponent<EnemyHealth>().stuned)
         {
+            float delay = Random.Range(0, shootCooldown);
+
+            if (firstShot)
+            {
+                shootCooldownTimer += delay;
+                firstShot = false;
+            }
             if (shootCooldownTimer >= shootCooldown)
             {
                 animator.SetTrigger("shoot");
                 Invoke(nameof(shoot), shootDelay);
                 shootCooldownTimer = 0;
-
+                
             }
             else
             {

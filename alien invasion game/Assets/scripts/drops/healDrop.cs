@@ -23,7 +23,7 @@ public class healDrop : MonoBehaviour
     {
         lifetime += Time.deltaTime;
         Vector3 dir = player.position + Vector3.up - transform.position;
-        rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 800));        
+        rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 8000));        
        
         rb.velocity = transform.forward * speed * lifetime;
     }

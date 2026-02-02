@@ -9788,7 +9788,7 @@ Transform:
   m_GameObject: {fileID: 5894791741596766213}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 11.59, z: 0}
+  m_LocalPosition: {x: 0, y: 14.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9847,12 +9847,13 @@ MonoBehaviour:
   projectile: {fileID: 2861612072394691832, guid: 37157f9b4b56bf547a1c3b76c4e35611,
     type: 3}
   firePoint: {fileID: 6928956003326839415}
-  numberOfBullets: 5
-  bulletSpeed: 50
+  numberOfBullets: 7
+  bulletSpeed: 55
   shootCooldown: 6
   shootDelay: 1
-  ProjectileDamage: 70
-  spread: {x: 25, y: 25}
+  ProjectileDamage: 25
+  spread: {x: 30, y: 30}
+  firstShot: 0
 --- !u!114 &1194735253553770518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9866,11 +9867,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stuned: 0
+  stunDuration: 0
+  stunTimer: 0
   flashMaterial: {fileID: 2100000, guid: c1bd2617aa3bf564d87789eab7ef0598, type: 2}
   flashDuration: 0.1
   miniHealOrb: {fileID: 8163379172689793875, guid: 0adaf106fd3e08546be90cbc459fb979,
     type: 3}
-  healOrb: {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
+  drops:
+  - {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
+  - {fileID: 1447436671432186352, guid: 41db903f16bc63048ad0d052a5679e18, type: 3}
   XPorbs: 12
   propability: 20
   offset: 5
@@ -9918,6 +9923,7 @@ MonoBehaviour:
   shooter: {fileID: 0}
   health: {fileID: 0}
   predictMovement: 0
+  grounded: 0
 --- !u!1 &7642377900339019333
 GameObject:
   m_ObjectHideFlags: 0
@@ -15368,6 +15374,7 @@ MonoBehaviour:
   shooter: {fileID: 0}
   health: {fileID: 0}
   predictMovement: 0
+  grounded: 0
 --- !u!4 &4104021551499559071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3b53a3e17385f704098e817854c1905e,

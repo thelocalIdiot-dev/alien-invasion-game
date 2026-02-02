@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Timeline;
 
 public class SoundMIXmanager : MonoBehaviour
 {
     public AudioMixer audioMixer;
+    public settingsManager settingsManager;
+    public static SoundMIXmanager instance;
 
-    public void SetMasterVolume(float level)
+    private void Awake()
     {
-        audioMixer.SetFloat("Master", Mathf.Log10(level) * 20);
+        instance = this;
+      
     }
-    public void SetMusicVolume(float level)
-    {
-        audioMixer.SetFloat("Music", Mathf.Log10(level) * 20);
-    }
-    public void SetSfxVolume(float level)
-    {
-        audioMixer.SetFloat("sfx", Mathf.Log10(level) * 20);
-    }
+
+    
 }

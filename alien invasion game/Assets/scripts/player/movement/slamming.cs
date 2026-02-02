@@ -14,6 +14,8 @@ public class slamming : MonoBehaviour, Abilities
 
     public float empDamage, empRadius, empForce;
 
+    public GameObject slamPartical;
+
     playerMovement movement;
 
     public bool Slamming, empSlam;
@@ -78,11 +80,14 @@ public class slamming : MonoBehaviour, Abilities
                     var rb = col.GetComponent<Rigidbody>();
                     if (rb != null)
                     {
-                        rb.AddForce(Vector3.up * slamForce, ForceMode.Impulse);
+                        rb.constraints = RigidbodyConstraints.None;
+
+                        rb.AddForce(Vector3.up * slamForce, ForceMode.VelocityChange);
                     }
                 }
-
-                SoundManager.PlaySound(SoundType.land);
+                GameObject GO = Instantiate(slamPartical, transform.position, Quaternion.identity);
+                Destroy(GO, 3);
+                SoundManager.PlaySound(SoundType.slam);
             }
             else
             {
@@ -97,7 +102,7 @@ public class slamming : MonoBehaviour, Abilities
                     if (enemyHealth != null)
                     {
                         enemyHealth.TakeDamage(empDamage);
-                        enemyHealth.GetStunned(3);
+                        enemyHealth.GetStunned(4);
                     }
 
                     var rb = col.GetComponent<Rigidbody>();
@@ -109,7 +114,6 @@ public class slamming : MonoBehaviour, Abilities
                 SoundManager.PlaySound(SoundType.empSlam);
                 GameObject GO = Instantiate(empPartical, transform.position, Quaternion.identity);
                 Destroy(GO, 3);
-                SoundManager.PlaySound(SoundType.land);
             }          
         }
     }

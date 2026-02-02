@@ -168,11 +168,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stuned: 0
+  stunDuration: 0
+  stunTimer: 0
   flashMaterial: {fileID: 2100000, guid: c1bd2617aa3bf564d87789eab7ef0598, type: 2}
   flashDuration: 0.1
   miniHealOrb: {fileID: 8163379172689793875, guid: 0adaf106fd3e08546be90cbc459fb979,
     type: 3}
-  healOrb: {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
+  drops:
+  - {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
+  - {fileID: 1447436671432186352, guid: 41db903f16bc63048ad0d052a5679e18, type: 3}
   XPorbs: 11
   propability: 10
   offset: 5
@@ -217,7 +221,10 @@ MonoBehaviour:
   lookSpeed: 3
   offset: {x: 0, y: 0, z: 0}
   lockUp: 1
+  shooter: {fileID: 0}
   health: {fileID: 0}
+  predictMovement: 1
+  grounded: 0
 --- !u!1 &1029764002284447181
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,7 +5340,10 @@ MonoBehaviour:
   lookSpeed: 2
   offset: {x: 0, y: 3, z: 0}
   lockUp: 0
+  shooter: {fileID: 0}
   health: {fileID: 8986806934708255268}
+  predictMovement: 1
+  grounded: 0
 --- !u!1 &2444722825466137176
 GameObject:
   m_ObjectHideFlags: 0
@@ -11247,7 +11257,10 @@ MonoBehaviour:
   lookSpeed: 10
   offset: {x: 0, y: 2.3, z: 0}
   lockUp: 0
+  shooter: {fileID: 0}
   health: {fileID: 8986806934708255268}
+  predictMovement: 1
+  grounded: 0
 --- !u!1 &8485436880232098735
 GameObject:
   m_ObjectHideFlags: 0

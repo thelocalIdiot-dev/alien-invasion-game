@@ -38,7 +38,7 @@ public class EnemyTurn : MonoBehaviour
 
         if (EN != null)
         {
-            grounded = GetComponent<enemyNav>();
+            grounded = GetComponent<enemyNav>().Grounded();
         }
         else
         {
