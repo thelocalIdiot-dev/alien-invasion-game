@@ -6,6 +6,7 @@ using UnityEngine;
 public class valueManager : MonoBehaviour, Abilities
 {
     public bool unlocked { get; set; }
+    public bool hasEnergyEffect { get; set; }
 
     public static valueManager instance;
 
@@ -53,6 +54,7 @@ public class valueManager : MonoBehaviour, Abilities
         {
             SpeedMultiplier *= UPGSO.upGradeAmount;
             playerMovement.instance.runSpeed *= SpeedMultiplier;
+            playerMovement.instance.speedBuff += playerMovement.instance.runSpeed;
         }
 
     }

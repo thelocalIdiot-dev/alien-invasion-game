@@ -1,6 +1,8 @@
+using EZCameraShake;
 using SmallHedge.SoundManager;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class EnemyHealth : MonoBehaviour, Damageable
 {
@@ -23,8 +25,10 @@ public class EnemyHealth : MonoBehaviour, Damageable
     [Header("Health")]
     public float maxHealth = 300f;
     public float currentHealth;
+    public float deathShake;
 
     [Header("VFX")]
+    public GameObject deahBlood;
     public GameObject blood;
     public Transform bloodPosition;
     public GameObject stunPartical;
@@ -35,7 +39,7 @@ public class EnemyHealth : MonoBehaviour, Damageable
 
     void Awake()
     {
-        //maxHealth *= scoreManager.instance.currentWave * 0.1f;
+        maxHealth += scoreManager.instance.currentWave * 2f;
 
         currentHealth = maxHealth;
 
@@ -50,26 +54,34 @@ public class EnemyHealth : MonoBehaviour, Damageable
         }
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(Vector3 hitPos,float amount)
     {
         enemyNav en = GetComponent<enemyNav>();
+
+        float finalAmount = amount;
+
         if (en)
         {
             if (en.Grounded())
             {
-                currentHealth -= amount;
+                finalAmount = amount;
             }
             else
             {
-                currentHealth -= amount * 2;
+                finalAmount = amount * 2;
             }
         }
         else
         {
-            currentHealth -= amount;
+            finalAmount = amount;
         }
         
+        currentHealth -= finalAmount;
+
         Flash();
+        Instantiate(blood, hitPos, Quaternion.identity);
+        Vector3 FinalOffset = new Vector3(Random.Range(-offset, offset), Random.Range(-offset, offset), Random.Range(-offset, offset));
+        damagePopupManager.instance.spawnPopup(Mathf.RoundToInt(finalAmount), transform.position + FinalOffset);
         SoundManager.PlaySound(SoundType.enemyHurt);
         if (currentHealth <= 0)
         {           
@@ -103,29 +115,42 @@ public class EnemyHealth : MonoBehaviour, Damageable
     {
         if (bloodPosition != null)
         {
-            GameObject gib = Instantiate(blood, bloodPosition.position, Quaternion.identity);
+            GameObject gib = Instantiate(deahBlood, bloodPosition.position, Quaternion.identity);
             Destroy(gib, 1f);
         }
         else if(bloodPosition == null)
         {
-            GameObject gib = Instantiate(blood, transform.position, Quaternion.identity);
+            GameObject gib = Instantiate(deahBlood, transform.position, Quaternion.identity);
             Destroy(gib, 1f);
         }
         scoreManager.instance.UpdateKill();
 
         for (int i = 0;i < XPorbs; i++)
         {
-            Vector3 FinalOffset = new Vector3(Random.Range(-offset, offset), Random.Range(-offset, offset), Random.Range(-offset, offset));
             if (EchoOrbsChance())
             {
-                Instantiate(miniHealOrb, transform.position + FinalOffset, Quaternion.identity);
+                spawnOrbs();
             }
-            Instantiate(miniHealOrb, transform.position + FinalOffset, Quaternion.identity);
+            spawnOrbs();
             
         }
-
+        CameraShaker.Instance.ShakeOnce(deathShake, 5f, 0, .5f);
         droploot(drops[Random.Range(0, drops.Length)]);
         Destroy(gameObject);
+    }
+
+    public void spawnOrbs()
+    {
+        Vector3 FinalOffset = new Vector3(Random.Range(-offset, offset), Random.Range(-offset, offset), Random.Range(-offset, offset));
+
+        if (bloodPosition != null)
+        {
+            Instantiate(miniHealOrb, bloodPosition.position + FinalOffset, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(miniHealOrb, transform.position + FinalOffset, Quaternion.identity);
+        }
     }
 
     public void Flash()
@@ -182,5 +207,16 @@ public class EnemyHealth : MonoBehaviour, Damageable
             Instantiate(lootDrop, transform.position, Quaternion.identity);
         }       
     }
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        if (bloodPosition != null)
+        {
+            Gizmos.DrawWireSphere(bloodPosition.position, offset);
+        }
+        else
+        {
+            Gizmos.DrawWireSphere(transform.position, offset);
+        }
+    }
 }

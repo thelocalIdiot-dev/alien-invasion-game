@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8.4
-  damage: 0
+  damage: 15
   XPvalue: 10
   effect: {fileID: 2597047359321735627, guid: addfb19af79c90f4d9392a71190aa73d, type: 3}
 --- !u!54 &6909297632980053191

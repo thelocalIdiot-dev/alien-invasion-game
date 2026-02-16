@@ -118,9 +118,9 @@ public class settingsManager : MonoBehaviour
     // =========================
     // Resolution
     // =========================
-    public void SetResolution()
+    public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = filteredResolutions[currentResolutionIndex];
+        Resolution resolution = filteredResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, true);
         SaveSettings();
     }
@@ -203,7 +203,6 @@ public class settingsManager : MonoBehaviour
 
     float LinearToDb(float value)
     {
-        print(Mathf.Log10(value) * 20);
         return Mathf.Log10(value) * 20;
     }
 

@@ -3,13 +3,16 @@ using SmallHedge.SoundManager;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class gun : MonoBehaviour, Abilities
 {
     //bool so that the ability interface actually works
     public bool unlocked { get; set; }
+    public bool hasEnergyEffect { get; set; }
 
+    public Volume energyVolume;
 
     /* ─────────────── WEAPON STATS ─────────────── */
     [Header("Weapon Stats")]
@@ -19,6 +22,7 @@ public class gun : MonoBehaviour, Abilities
     public float fireRate;
     public float bulletsPerShot;
     public float spread;
+    public float EnergyFireRate;
 
     /* ─────────────── AMMO ─────────────── */
     [Header("Ammo")]
@@ -38,13 +42,16 @@ public class gun : MonoBehaviour, Abilities
     [Header("Visual Effects")]
     public GameObject muzzleFlash;
     public GameObject impactEffect;
+    public GameObject bloodEffect;
     public GameObject hitFlash;
     public float hitFlashDuration;
 
     /* ─────────────── CAMERA SHAKE ─────────────── */
     [Header("Camera Shake")]
     public float shootShakePower;
+    public float hitShakePower;
     public float shootShakeDuration;
+    public float hitShakeDuration;
 
     /* ─────────────── EXPLOSIONS ─────────────── */
     [Header("Explosion")]
@@ -90,12 +97,20 @@ public class gun : MonoBehaviour, Abilities
 
     private void Shoot()
     {
-        bulletsLeft--;
+        if(!hasEnergyEffect) { bulletsLeft--; }        
         if(bulletsLeft > ammo) { bulletsLeft = ammo; }
-        nextTimeToFire = Time.time + 1f / fireRate;
 
-        SoundManager.PlaySound(SoundType.shoot);
-        CameraShaker.Instance.ShakeOnce(shootShakePower, 0.5f, 0, shootShakeDuration);
+        if (hasEnergyEffect)
+        {
+            nextTimeToFire = Time.time + 1f / EnergyFireRate;
+        }
+        else
+        {
+            nextTimeToFire = Time.time + 1f / fireRate;
+        }
+        
+
+        SoundManager.PlaySound(SoundType.shoot);        
 
         PlayMuzzleFlash();
         CycleGunTip();
@@ -117,12 +132,17 @@ public class gun : MonoBehaviour, Abilities
 
         if (Physics.Raycast(cam.transform.position, bulletSpread, out RaycastHit hit, range))
         {
-            SpawnImpact(hit);
+            SpawnImpact(impactEffect, hit);
 
             if (hit.transform.TryGetComponent(out EnemyHealth enemy))
             {
-                enemy.TakeDamage(damage);
+                enemy.TakeDamage(hit.point, damage);
+                CameraShaker.Instance.ShakeOnce(hitShakePower, 0.5f, 0, hitShakeDuration);
                 StartCoroutine(HitFlashRoutine());
+            }
+            else
+            {
+                CameraShaker.Instance.ShakeOnce(shootShakePower, 0.5f, 0, shootShakeDuration);
             }
 
             if (hit.transform.TryGetComponent(out Rigidbody EnemyRB))
@@ -158,9 +178,9 @@ public class gun : MonoBehaviour, Abilities
         Destroy(flash, 0.5f);
     }
 
-    private void SpawnImpact(RaycastHit hit)
+    private void SpawnImpact(GameObject effect, RaycastHit hit)
     {
-        GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        GameObject impact = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(impact, 0.7f);
     }
 
@@ -183,10 +203,25 @@ public class gun : MonoBehaviour, Abilities
     {
         reloadIcon.SetActive(reloading);
 
+        energyVolume.enabled = hasEnergyEffect;
+
         reloadIcon.transform.Rotate(0, 0, -10);
 
         float targetValue = bulletsLeft / ammo;
         ammoSlider.value = Mathf.Lerp(ammoSlider.value, targetValue, 0.25f);
+    }
+
+    /* ------------- Energy buff --------------*/ 
+    public void EnergyEffect(float duration)
+    {
+        hasEnergyEffect = true;
+
+        Invoke(nameof(resetEffect), duration);
+    }
+
+    void resetEffect()
+    {
+        hasEnergyEffect = false;
     }
 
     /* ─────────────── Upgrade ─────────────── */

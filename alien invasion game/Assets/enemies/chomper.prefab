@@ -9882,12 +9882,16 @@ MonoBehaviour:
   drops:
   - {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
   - {fileID: 1447436671432186352, guid: 41db903f16bc63048ad0d052a5679e18, type: 3}
+  - {fileID: 5032068748314238442, guid: 595796f57aee35040a862ff81737520c, type: 3}
   XPorbs: 5
   propability: 4
   offset: 5
   maxHealth: 300
   currentHealth: 300
-  blood: {fileID: 550212661680399681, guid: 98d86375978bd544e84d947ecdaee65b, type: 3}
+  deathShake: 6
+  deahBlood: {fileID: 550212661680399681, guid: 98d86375978bd544e84d947ecdaee65b,
+    type: 3}
+  blood: {fileID: 5469927904808794485, guid: 9a0180171bca70547a700fba8c6061b8, type: 3}
   bloodPosition: {fileID: 113862206435406016}
   stunPartical: {fileID: 2771655459278611005}
 --- !u!114 &7049096499234706806

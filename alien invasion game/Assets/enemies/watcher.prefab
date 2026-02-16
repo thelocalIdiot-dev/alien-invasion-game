@@ -9876,12 +9876,16 @@ MonoBehaviour:
   drops:
   - {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
   - {fileID: 1447436671432186352, guid: 41db903f16bc63048ad0d052a5679e18, type: 3}
+  - {fileID: 5032068748314238442, guid: 595796f57aee35040a862ff81737520c, type: 3}
   XPorbs: 12
   propability: 20
-  offset: 5
+  offset: 5.26
   maxHealth: 800
   currentHealth: 0
-  blood: {fileID: 550212661680399681, guid: cf70f9cb98943b0448195ee2c2cda4f8, type: 3}
+  deathShake: 20
+  deahBlood: {fileID: 550212661680399681, guid: cf70f9cb98943b0448195ee2c2cda4f8,
+    type: 3}
+  blood: {fileID: 5469927904808794485, guid: 9a0180171bca70547a700fba8c6061b8, type: 3}
   bloodPosition: {fileID: 4560442498303311597}
   stunPartical: {fileID: 1024679995012622923}
 --- !u!65 &4100568045917259510
@@ -14847,7 +14851,7 @@ Transform:
   m_GameObject: {fileID: 8547245593041041926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.18, z: 0}
+  m_LocalPosition: {x: 0, y: 6.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

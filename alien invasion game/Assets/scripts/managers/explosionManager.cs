@@ -13,9 +13,7 @@ public class explosionManager : MonoBehaviour
     public static void Explosion(Vector3 position, explosionObj explosion)
     {
         var surroundingObjects = Physics.OverlapSphere(position, explosion.radius);
-
-        
-
+       
         // effects
         SoundManager.PlaySound(SoundType.explosion);
         CameraShaker.Instance.ShakeOnce(explosion.mag, explosion.rough, 0, explosion.fadeOut);
@@ -35,8 +33,16 @@ public class explosionManager : MonoBehaviour
             }
             if(explosion.enemy)
             {
-                var Healths = obj.GetComponent<EnemyHealth>();
-                if (Healths != null) { Healths.TakeDamage(explosion.damage); }
+                RaycastHit hit;
+
+                Vector3 direction = (obj.transform.position - position).normalized;
+
+                if (Physics.Raycast(position, direction, out hit, 5f))
+                {
+                    EnemyHealth enemyHealth = obj.GetComponent<EnemyHealth>();
+                    if (enemyHealth != null)
+                        enemyHealth.TakeDamage(hit.point, explosion.damage);
+                }
             }
                         
         }

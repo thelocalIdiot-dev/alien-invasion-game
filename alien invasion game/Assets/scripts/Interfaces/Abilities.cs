@@ -5,6 +5,12 @@ using UnityEngine;
 public interface Abilities
 {
     public bool unlocked {  get; set; }
+    public bool hasEnergyEffect {  get; set; }
+
+    public void EnergyEffect(float duration)
+    {
+
+    }
 
     public void upgrade(UpGradeSO UPGSO)
     {

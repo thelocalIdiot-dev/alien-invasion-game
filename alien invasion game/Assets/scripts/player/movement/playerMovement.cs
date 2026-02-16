@@ -94,6 +94,7 @@ public class playerMovement : MonoBehaviour
         {
             instance = this;
         }
+
     }
 
     private void Start()
@@ -149,6 +150,7 @@ public class playerMovement : MonoBehaviour
 
     public void SpeedEffect(float duration)
     {
+        
         hasSpeedEffect = true;
         Invoke(nameof(DisableSpeedEffect), duration);
     } 
@@ -381,5 +383,11 @@ public class playerMovement : MonoBehaviour
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, Slopehit.normal).normalized;
+    }
+
+    [ContextMenu("DZA WORDOOOOOOOOOOOOOOOOOOOOOOO")]
+    void deleteAll()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

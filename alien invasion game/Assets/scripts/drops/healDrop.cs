@@ -36,7 +36,7 @@ public class healDrop : MonoBehaviour
         {
             GameObject effects = Instantiate(effect, transform.position, Quaternion.identity);
             Destroy(effects, 1);
-            EH.TakeDamage(damage);
+            EH.TakeDamage(transform.position, damage);
         }
 
         if (other.gameObject.CompareTag("Player"))

@@ -62,8 +62,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 10
-  particals: {fileID: 8009035716486996161, guid: fc8d9dd86e6c56b4e891fa77866aaedd,
+  particals: {fileID: 8009035716486996161, guid: dc6f6e0b36152fc48bf8ac0dd59d6611,
     type: 3}
+  abilityObj: []
+  flashColor: {r: 0, g: 0.9714763, b: 1, a: 1}
+  Type: 0
 --- !u!54 &8724068241075365200
 Rigidbody:
   m_ObjectHideFlags: 0

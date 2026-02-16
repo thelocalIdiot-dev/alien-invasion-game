@@ -155,6 +155,7 @@ MonoBehaviour:
   shootDelay: 1
   ProjectileDamage: 100
   spread: {x: 25, y: 0}
+  firstShot: 0
 --- !u!114 &8986806934708255268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,12 +178,16 @@ MonoBehaviour:
   drops:
   - {fileID: 3288156567968396259, guid: aaa41cf3580e8ef44a7a9d619c1bb747, type: 3}
   - {fileID: 1447436671432186352, guid: 41db903f16bc63048ad0d052a5679e18, type: 3}
+  - {fileID: 5032068748314238442, guid: 595796f57aee35040a862ff81737520c, type: 3}
   XPorbs: 11
   propability: 10
-  offset: 5
+  offset: 5.54
   maxHealth: 700
   currentHealth: 0
-  blood: {fileID: 550212661680399681, guid: cf70f9cb98943b0448195ee2c2cda4f8, type: 3}
+  deathShake: 20
+  deahBlood: {fileID: 550212661680399681, guid: cf70f9cb98943b0448195ee2c2cda4f8,
+    type: 3}
+  blood: {fileID: 5469927904808794485, guid: 9a0180171bca70547a700fba8c6061b8, type: 3}
   bloodPosition: {fileID: 5453122636336527166}
   stunPartical: {fileID: 9213275428290248605}
 --- !u!65 &7996257704732906652

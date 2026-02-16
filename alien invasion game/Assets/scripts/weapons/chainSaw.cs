@@ -17,12 +17,13 @@ public class chainSaw : MonoBehaviour, Abilities
     public bool thrown = false;
     public GameObject _object;
     public bool canThrow;
-    public float Power = 100, cooldown, cooldownTimer;
+    public float Power = 100, cooldown, cooldownTimer, energyCooldown;
     [Header("chain saw")]
     public float SpinSpeed = 60, damage;
     public float lifeTime = 3;
-    public bool unlocked { get; set; }
 
+    public bool unlocked { get; set; }
+    public bool hasEnergyEffect { get; set; }
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -42,6 +43,18 @@ public class chainSaw : MonoBehaviour, Abilities
         }
     }
 
+    public void EnergyEffect(float duration)
+    {
+        hasEnergyEffect = true;
+
+        Invoke(nameof(resetEffect), duration);
+    }
+
+    void resetEffect()
+    {
+        hasEnergyEffect = false;
+    }
+
     private void Update()
     {       
         spinStuff();
@@ -49,7 +62,15 @@ public class chainSaw : MonoBehaviour, Abilities
         if (!thrown && unlocked)
         {           
             icon.maxValue = cooldown;
-            icon.value = cooldownTimer;
+            if (hasEnergyEffect)
+            {
+                icon.value = icon.maxValue;
+            }
+            else
+            {
+                icon.value = cooldownTimer;
+            }
+            
 
             if (Input.GetKeyDown(KeyCode.E) && canThrow && PlayerHealth.instance.alive)
             {
@@ -62,7 +83,7 @@ public class chainSaw : MonoBehaviour, Abilities
                 {
                     colliders[i].enabled = true;
                 }
-                chainLoop.pitch += Time.deltaTime;
+                chainLoop.pitch += Time.deltaTime * 0.7f;
                 models.gameObject.SetActive(true);
             }
 
@@ -80,15 +101,29 @@ public class chainSaw : MonoBehaviour, Abilities
                 chainLoop.Stop();
             }
 
-            if (cooldownTimer >= cooldown)
+            if (hasEnergyEffect)
             {
-                canThrow = true;
+                if (cooldownTimer >= energyCooldown)
+                {
+                    canThrow = true;
+                }
+                else
+                {
+                    cooldownTimer += Time.deltaTime;
+                }
             }
             else
             {
-                cooldownTimer += Time.deltaTime;
+                if (cooldownTimer >= cooldown)
+                {
+                    canThrow = true;
+                }
+                else
+                {
+                    cooldownTimer += Time.deltaTime;
+                }
             }
-            chainLoop.pitch = Mathf.Clamp(chainLoop.pitch, 0, 1.5f);
+            chainLoop.pitch = Mathf.Clamp(chainLoop.pitch, 0, 1f);
 
         }
     }
@@ -115,24 +150,20 @@ public class chainSaw : MonoBehaviour, Abilities
     {
         SoundManager.PlaySound(SoundType.chainsawHit);
         EnemyHealth EN = other.GetComponent<EnemyHealth>();
-        
-        if (EN != null)
+
+        RaycastHit hit;
+
+        Vector3 direction = (other.transform.position - transform.position).normalized;
+
+        if (Physics.Raycast(transform.position, direction, out hit, 5f))
         {
-            EN.TakeDamage(damage);
-        }
+            if (EN != null)
+            {
+                EN.TakeDamage(hit.point, damage);
+            }
+        }      
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-
-        EnemyHealth EN = collision.gameObject.GetComponent<EnemyHealth>();
-
-        if (EN != null)
-        {
-            EN.TakeDamage(damage);
-        }
-    }
 
     void spinStuff()
     {

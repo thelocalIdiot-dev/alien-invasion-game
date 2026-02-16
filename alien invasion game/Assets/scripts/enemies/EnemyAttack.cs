@@ -18,7 +18,7 @@ public class EnemyAttack : MonoBehaviour
         attacked = false;
         canAttack = true;
         EN = GetComponent<enemyNav>();
-        damage += scoreManager.instance.currentWave * 3.5f;
+        damage += scoreManager.instance.currentWave * 4f;
     }
 
     void Update()

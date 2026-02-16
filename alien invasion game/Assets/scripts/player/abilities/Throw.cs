@@ -7,9 +7,10 @@ public class Throw : MonoBehaviour, Abilities
 {
     public GameObject _object;
     public bool canThrow;
-    public float basePower, MaxPower = 100, cooldown, cooldownTimer;
+    public float basePower, MaxPower = 100, cooldown, cooldownTimer, energyCooldown;
 
     public bool unlocked { get; set; }
+    public bool hasEnergyEffect { get; set; }
 
     float BaseDamage, BaseRadius;
 
@@ -34,7 +35,14 @@ public class Throw : MonoBehaviour, Abilities
         icon.gameObject.SetActive(unlocked);
         if (!unlocked) return;
         icon.maxValue = cooldown;
-        icon.value = cooldownTimer;
+        if (hasEnergyEffect)
+        {
+            icon.value = icon.maxValue;
+        }
+        else
+        {
+            icon.value = cooldownTimer;
+        }
 
         if (Input.GetKey(throwKey) && canThrow && PlayerHealth.instance.alive)
         {
@@ -51,14 +59,40 @@ public class Throw : MonoBehaviour, Abilities
             basePower = 0;
         }
 
-        if (cooldownTimer >= cooldown)
+        if (hasEnergyEffect)
         {
-            canThrow = true;
+            if (cooldownTimer >= energyCooldown)
+            {
+                canThrow = true;
+            }
+            else
+            {
+                cooldownTimer += Time.deltaTime;
+            }
         }
         else
         {
-            cooldownTimer += Time.deltaTime;
-        }
+            if (cooldownTimer >= cooldown)
+            {
+                canThrow = true;
+            }
+            else
+            {
+                cooldownTimer += Time.deltaTime;
+            }
+        }        
+    }
+
+    public void EnergyEffect(float duration)
+    {
+        hasEnergyEffect = true;
+
+        Invoke(nameof(resetEffect), duration);
+    }
+
+    void resetEffect()
+    {
+        hasEnergyEffect = false;
     }
 
     void ThrowObj(GameObject obj, float ThrowPower)

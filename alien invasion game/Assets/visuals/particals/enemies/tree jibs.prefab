@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3271084431786018225}
   - component: {fileID: 2316665308981022843}
   - component: {fileID: 101027210311708966}
+  - component: {fileID: 7203914235956120284}
   m_Layer: 0
   m_Name: tree jibs
   m_TagString: Untagged
@@ -981,7 +982,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 30
+        scalar: 35
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -3678,7 +3679,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     type: 0
     collisionMode: 0
@@ -3796,7 +3797,7 @@ ParticleSystem:
     m_EnergyLossOnCollision:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4889,6 +4890,22 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7203914235956120284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550212661680399681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b72bcfc7b27034babf6edea55f1552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decals:
+  - {fileID: 7766692476944775209, guid: 5811fe8a95391d749a0e776336306e74, type: 3}
+  - {fileID: 4923194990959277832, guid: 57b7c776b359d5e498345167c0b88dd4, type: 3}
+  decalPropability: 30
 --- !u!1 &8422971514574121496
 GameObject:
   m_ObjectHideFlags: 0

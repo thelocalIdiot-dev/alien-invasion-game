@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 public class slamming : MonoBehaviour, Abilities
 {
     public bool unlocked { get; set; }
+    public bool hasEnergyEffect { get; set; }
 
     public float slammingPower, slamDamage, slamRadius, slamForce;
 
@@ -74,7 +75,7 @@ public class slamming : MonoBehaviour, Abilities
 
                     if (enemyHealth != null)
                     {
-                        enemyHealth.TakeDamage(slamDamage);
+                        enemyHealth.TakeDamage(collision.GetContact(0).point, slamDamage);
                     }
 
                     var rb = col.GetComponent<Rigidbody>();
@@ -101,7 +102,7 @@ public class slamming : MonoBehaviour, Abilities
 
                     if (enemyHealth != null)
                     {
-                        enemyHealth.TakeDamage(empDamage);
+                        enemyHealth.TakeDamage(collision.GetContact(0).point, empDamage);
                         enemyHealth.GetStunned(4);
                     }
 

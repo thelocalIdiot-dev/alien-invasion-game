@@ -24,7 +24,6 @@ public class PlayerHealth : MonoBehaviour , Damageable
     public GameObject hudCanvas;
     public GameObject DeathCanvas;
     public GameObject enemies;
-    public GameObject HighScore;
 
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI tipText;
@@ -94,18 +93,11 @@ public class PlayerHealth : MonoBehaviour , Damageable
         GetComponentInChildren<Animator>().SetFloat("speed", 0);
         alive = false;
         ScoreText.SetText("score:"+scoreManager.instance.currentWave.ToString());
+        highScoreText.SetText("high score:" + PlayerPrefs.GetInt("high score", scoreManager.instance.currentWave));
         if (PlayerPrefs.GetInt("high score", 1) < scoreManager.instance.currentWave)
         {
-            //HighScore.SetActive(true);
             PlayerPrefs.SetInt("high score", scoreManager.instance.currentWave);
-            highScoreText.SetText("high score:"+scoreManager.instance.currentWave.ToString());
-        }
-        else
-        {
-            highScoreText.SetText("");
-            //HighScore.SetActive(false);
-        }
-        
+        }        
         Invoke(nameof(explode), 1);
     }
 
